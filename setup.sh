@@ -2,6 +2,8 @@
 # dependencies:
 # - brew
 # - xcode and developer tools (i.e. xcode-select --install)
+# NOTE: Have to put in password to install some things; have to give some
+# programs accessiiblity permissions (e.g. skhd)
 
 # TODO installing gvfs requires installing macports
 # TODO kitty config
@@ -13,6 +15,12 @@
 # brew seems extremely slow...
 echo "Installing packages with Brew."
 brew bundle --no-upgrade || exit 1
+
+# * Stow
+# shellcheck disable=1090
+source ~/dotfiles/scripts/aliases/stow.sh
+echo "Symlinking config files."
+restow || echo "Symlinking config files failed."
 
 # * Emacs config
 emacs_setup() (
@@ -53,9 +61,21 @@ emacs_setup() (
 echo "Setting up Emacs with latest configuration."
 emacs_setup || echo "Emacs setup failed."
 
-# * Locate Service
+install_emacs_anywhere() {
+	if [[ ! -d ~/.emacs_anywhere/.git ]]; then
+		git clone https://github.com/zachcurry/emacs_anywhere ~/.emacs-anywhere
+	fi
+	# cp -Rf ~/.emacs-anywhere/"Emacs Anywhere".workflow ~/Library/Services
+}
+
+install_emacs_anywhere || echo "Installing Emacs Anywhere failed."
+
+# * Services
 echo "Enabling services."
 sudo launchctl load -w /System/Library/LaunchDaemons/com.apple.locate.plist
+
+brew services start emacs-plus
+brew services start skhd
 
 # * NPM/Yarn
 echo "Installing programs with yarn."

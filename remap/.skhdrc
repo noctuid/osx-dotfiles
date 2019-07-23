@@ -1,0 +1,14 @@
+# emacs
+cmd - i : emacsclient -c
+
+# emacs anywhere
+cmd + shift - i : ~/.emacs_anywhere/bin/run
+
+# open terminal
+cmd - return : /Applications/Kitty.app/Contents/MacOS/kitty --single-instance -d ~
+
+# open qutebrowser
+# cmd + shift - return : ~/Scripts/qtb.sh
+
+# open mpv
+cmd - m : open -na /Applications/mpv.app $(pbpaste)

@@ -29,6 +29,17 @@ cask "virtualbox"
 # Window Switching
 cask "hotswitch"
 
+# * Remapping
+# hotkey daemon
+# TODO why does this work with brew install but fail with brew bundle??
+cask "koekeishiya/formulae/skhd", restart_service: :changed
+
+# remapping
+cask "karabiner-elements"
+
+# keyboard layout editing
+cask "ukelele"
+
 # * Browsers
 # cask "firefox"
 # cask "google-chrome"
