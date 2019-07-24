@@ -82,3 +82,25 @@ echo "Installing programs with yarn."
 yarn global add indium
 yarn global add typescript-language-server
 yarn global add prettier
+
+# * Git Config Reminder
+if [[ ! -f ~/.gitconfig ]]; then
+	echo 'Remember to setup ~/.gitconfig with:
+[includeIf "gitdir:~/school/**"]
+path = .gitconfig-school
+[includeIf "gitdir:~/src/**"]
+path = .gitconfig-personal
+[includeIf "gitdir:~/src/**"]
+path = .gitconfig-personal
+[includeIf "gitdir:~/dotfiles/**"]
+path = .gitconfig-personal
+'
+fi
+
+if [[ ! -f ~/.gitconfig-school ]]; then
+	echo "Remember to create ~/.gitconfig-school"
+fi
+
+if [[ ! -f ~/.gitconfig-personal ]]; then
+	echo "Remember to create ~/.gitconfig-personal"
+fi
