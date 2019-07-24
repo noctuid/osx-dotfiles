@@ -14,7 +14,7 @@
 # * Package Installation
 # brew seems extremely slow...
 echo "Installing packages with Brew."
-brew bundle --no-upgrade || exit 1
+brew bundle --no-upgrade || echo "Brew package installation failed."
 
 # * Stow
 # shellcheck disable=1090
