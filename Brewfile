@@ -68,8 +68,12 @@ brew "ripgrep"
 
 # * Editors
 # --HEAD not officially supported but it works
-brew "emacs-plus", args: ["HEAD", "without-spacemacs-icon"]
+brew "emacs-plus", args: ["HEAD", "without-spacemacs-icon", "with-jansson"]
 brew "neovim"
+
+# * TeX
+# includes pdflatex
+cask "basictex"
 
 # * Programming
 # ** Bash
