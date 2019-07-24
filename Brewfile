@@ -70,6 +70,7 @@ brew "ripgrep"
 # --HEAD not officially supported but it works
 brew "emacs-plus", args: ["HEAD", "without-spacemacs-icon", "with-jansson"]
 brew "neovim"
+cask "visual-studio-code"
 
 # * TeX
 # includes pdflatex

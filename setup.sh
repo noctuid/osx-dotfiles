@@ -70,6 +70,14 @@ install_emacs_anywhere() {
 
 install_emacs_anywhere || echo "Installing Emacs Anywhere failed."
 
+# * VS Code Setup
+vscode_setup() {
+	grep --invert-match '^#' ~/dotfiles/editing/vscode-extensions.txt \
+		| xargs -L1 code --install-extension
+}
+
+vscode_setup || echo "VS Code setup failed."
+
 # * Services
 echo "Enabling services."
 sudo launchctl load -w /System/Library/LaunchDaemons/com.apple.locate.plist

@@ -1,0 +1,17 @@
+eamodio.gitlens
+EditorConfig.EditorConfig
+esbenp.prettier-vscode
+lihui.vs-external-tools
+ms-python.python
+ms-vscode.csharp
+ms-vscode.powershell
+msjsdiag.debugger-for-chrome
+Orta.vscode-jest
+tomphilbin.gruvbox-themes
+VisualStudioExptTeam.vscodeintellicode
+vscjava.vscode-java-debug
+vscjava.vscode-java-dependency
+vscjava.vscode-java-pack
+vscjava.vscode-java-test
+vscjava.vscode-maven
+waderyan.gitblame

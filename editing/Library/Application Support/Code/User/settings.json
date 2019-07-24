@@ -1,0 +1,55 @@
+{
+  "vs-external-tools.externalCommand1.command": "emacsclient",
+  "vs-external-tools.externalCommand1.args": [
+    "-a",
+    "",
+    "-c",
+    "+$(CurLine):$(CurCol)",
+    "$(ItemPath)"
+  ],
+  "vs-external-tools.externalCommand2.command": "emacs",
+  "vs-external-tools.externalCommand2.args": [
+    "+$(CurLine):$(CurCol)",
+    "$(ItemPath)"
+  ],
+  // autosave after 1000ms (default)
+  "files.autoSave": "afterDelay",
+  // show whitespace characters except for single spaces between words
+  "editor.renderWhitespace": "boundary",
+  "editor.cursorBlinking": "solid",
+  "workbench.colorTheme": "Gruvbox Dark (Soft)",
+  "[javascript]": {
+    "editor.formatOnSave": true,
+    "editor.tabSize": 2
+  },
+  "[javascriptreact]": {
+    "editor.formatOnSave": true,
+    "editor.tabSize": 2
+  },
+  "[typescript]": {
+    "editor.formatOnSave": true,
+    "editor.tabSize": 2
+  },
+  "[typescriptreact]": {
+    "editor.formatOnSave": true,
+    "editor.tabSize": 2
+  },
+  "window.zoomLevel": 0,
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "editor.suggestSelection": "first",
+  "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+  "python.jediEnabled": false,
+  "[css]": {
+    "editor.formatOnSave": true,
+    "editor.tabSize": 4
+  },
+  "[json]": {
+    "editor.formatOnSave": true
+  },
+  "[scss]": {
+    "editor.formatOnSave": true
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  }
+}

@@ -1,0 +1,34 @@
+[
+  {
+    "key": "tab",
+    "command": "selectNextQuickFix",
+    "when": "editorFocus && quickFixWidgetVisible"
+  },
+  {
+    "key": "shift+tab",
+    "command": "selectPrevQuickFix",
+    "when": "editorFocus && quickFixWidgetVisible"
+  },
+  {
+    "key": "tab",
+    "command": "selectNextSuggestion",
+    "when": "editorTextFocus && suggestWidgetMultipleSuggestions && suggestWidgetVisible"
+  },
+  {
+    "key": "shift+tab",
+    "command": "selectPrevSuggestion",
+    "when": "editorTextFocus && suggestWidgetMultipleSuggestions && suggestWidgetVisible"
+  },
+  {
+    "key": "alt+r",
+    "command": "editor.emmet.action.updateTag"
+  },
+  {
+    "key": "shift+alt+e",
+    "command": "vs-external-tools.externalCommand1"
+  },
+  {
+    "key": "cmd+shift+alt+e",
+    "command": "vs-external-tools.externalCommand2"
+  }
+]
