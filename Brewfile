@@ -69,6 +69,8 @@ brew "ripgrep"
 # * Editors
 # --HEAD not officially supported but it works
 brew "emacs-plus", args: ["HEAD", "without-spacemacs-icon", "with-jansson"]
+# Emacs package management tool
+brew "cask"
 brew "neovim"
 cask "visual-studio-code"
 
