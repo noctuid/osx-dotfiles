@@ -88,9 +88,12 @@ brew services start skhd
 
 # * NPM/Yarn
 echo "Installing programs with yarn."
-yarn global add indium
+yarn global add typescript
 yarn global add typescript-language-server
+yarn global add indium
 yarn global add prettier
+yarn global add react-native-cli
+yarn global add ios-deploy
 
 # * Git Config Reminder
 if [[ ! -f ~/.gitconfig ]]; then

@@ -6,6 +6,7 @@ ms-python.python
 ms-vscode.csharp
 ms-vscode.powershell
 msjsdiag.debugger-for-chrome
+msjsdiag.vscode-react-native
 Orta.vscode-jest
 tomphilbin.gruvbox-themes
 VisualStudioExptTeam.vscodeintellicode
