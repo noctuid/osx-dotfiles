@@ -16,13 +16,8 @@
 echo "Installing packages with Brew."
 brew bundle --no-upgrade || echo "Brew package installation failed."
 
-# * Stow
-# shellcheck disable=1090
-source ~/dotfiles/scripts/aliases/stow.sh
-echo "Symlinking config files."
-restow || echo "Symlinking config files failed."
-
 # * Emacs config
+# TODO this move, delete, then move back thing is bad; BAD
 emacs_setup() (
 	# useful here (but see http://mywiki.wooledge.org/BashFAQ/105)
 	set -e
@@ -37,11 +32,11 @@ emacs_setup() (
 	fi
 
 	mkdir -p ~/tmp/.emacs.d
-	if [[ -f ~/.emacs.d/lisp.local.el ]]; then
-		cp -f ~/.emacs.d/lisp/local.el ~/tmp/.emacs.d/
-	fi
 	if [[ -d ~/.emacs.d/straight ]]; then
 		sudo cp -Rf ~/.emacs.d/straight ~/tmp/.emacs.d/
+	fi
+	if [[ -d ~/.emacs.d/var ]]; then
+		sudo cp -Rf ~/.emacs.d/var ~/tmp/.emacs.d/
 	fi
 
 	trash ~/.emacs.d
@@ -69,6 +64,12 @@ install_emacs_anywhere() {
 }
 
 install_emacs_anywhere || echo "Installing Emacs Anywhere failed."
+
+# * Stow
+# shellcheck disable=1090
+source ~/dotfiles/scripts/aliases/stow.sh
+echo "Symlinking config files."
+restow || echo "Symlinking config files failed."
 
 # * VS Code Setup
 vscode_setup() {
