@@ -105,7 +105,7 @@ if [[ ! -f ~/.gitconfig ]]; then
 	echo 'Remember to setup ~/.gitconfig with:
 [includeIf "gitdir:~/school/**"]
 path = .gitconfig-school
-[includeIf "gitdir:~/src/**"]
+[includeIf "gitdir:~/src/emacs/**"]
 path = .gitconfig-personal
 [includeIf "gitdir:~/src/**"]
 path = .gitconfig-personal
