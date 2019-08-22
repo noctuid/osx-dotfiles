@@ -11,6 +11,8 @@
 # TODO ranger config
 # TODO browser config
 
+basedir=$(dirname "$(realpath "$0")")
+
 # * Package Installation
 # brew seems extremely slow...
 echo "Installing packages with Brew."
@@ -94,6 +96,9 @@ yarn global add indium
 yarn global add prettier
 yarn global add react-native-cli
 yarn global add ios-deploy
+
+# * Python
+pip3 install -r "$basedir"/requirments.txt
 
 # * Git Config Reminder
 if [[ ! -f ~/.gitconfig ]]; then

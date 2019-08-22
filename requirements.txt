@@ -1,0 +1,62 @@
+# * Language Server
+python-language-server[all]
+
+# completions, definitions, references, etc. (included with server)
+# jedi
+
+# completions and renaming (included with server[all])
+# rope
+
+# * Linting
+# error (included with server[all])
+# pyflakes
+
+# style; previously called pep8 (included with serever[all])
+# pycodestyle
+
+# docstring style (included with serever[all])
+# pydocstyle
+
+# complexity checking (included with server[all])
+# mccabe
+
+# wraps pyflakes, pycodestyle, and mccabe
+flake8
+
+# even more warnings
+pylint
+
+# * Type Hint Checking
+mypy
+pyls-mypy
+
+# * Formatting
+# sort imports
+isort
+pyls-isort
+
+# remove unused variables and imports
+autoflake
+
+# less configurable than yapf; deterministic
+black
+pyls-black
+
+# * Repl
+ptpython
+
+# * Virtual Environments
+virtualenv
+virtualenvwrapper
+
+# * Testing
+pytest
+
+# * Other
+# for importmagic.el: resolve unimported symbols
+epc
+importmagic
+
+# Local Variables:
+# mode: conf
+# End:

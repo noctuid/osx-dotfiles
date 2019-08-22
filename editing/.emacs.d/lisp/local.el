@@ -65,3 +65,8 @@
 ;; * JSON
 (use-package json-mode
   :gfhook (nil (lambda () (setq-local js-indent-level 2))))
+
+;; * Python
+;; since python 3 is python3 not python on OSX
+(setq flycheck-python-flake8-executable "python3"
+      flycheck-python-pylint-executable "python3")
