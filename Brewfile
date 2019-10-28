@@ -10,12 +10,14 @@ tap "valelint/vale"
 # * Basic Utilities
 brew "atool"
 brew "avfs"
+brew "bat"
 brew "cloc"
 # needed for libvterm, for example
 brew "cmake"
 # for gls, for example
 brew "coreutils"
 cask "docker"
+brew "exa"
 brew "ext4fuse"
 brew "imagemagick"
 brew "ispell"
@@ -46,8 +48,10 @@ cask "ukelele"
 
 # * Fonts
 cask "font-office-code-pro"
-cask "font-fira-code"
-cask "font-fira-mono"
+# cask "font-fira-code"
+cask "font-firacode-nerd-font-mono"
+# cask "font-fira-mono"
+cask "font-firamono-nerd-font-mono"
 
 # * Shells
 brew "fish"
@@ -62,6 +66,8 @@ cask "kitty"
 brew "ranger"
 
 # * Search Programs
+# kind of a search program
+brew "fasd"
 brew "fd"
 brew "fzf"
 brew "ripgrep"

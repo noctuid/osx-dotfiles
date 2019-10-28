@@ -6,12 +6,11 @@
 # programs accessiiblity permissions (e.g. skhd)
 
 # TODO installing gvfs requires installing macports
-# TODO kitty config
-# TODO zsh config
 # TODO ranger config
 # TODO browser config
 
 basedir=$(dirname "$(realpath "$0")")
+dotfiles=https://raw.githubusercontent.com/noctuid/dotfiles/master
 
 # * Package Installation
 # brew seems extremely slow...
@@ -66,6 +65,12 @@ install_emacs_anywhere() {
 }
 
 install_emacs_anywhere || echo "Installing Emacs Anywhere failed."
+
+# * Shell
+curl "$dotfiles"/terminal/.zshrc > ~/.zshrc
+
+mkdir -p ~/.config/kitty
+curl "$dotfiles"/terminal/.config/kitty/kitty.conf > ~/.config/kitty/kitty.conf
 
 # * Stow
 # shellcheck disable=1090
