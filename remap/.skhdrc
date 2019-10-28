@@ -1,5 +1,5 @@
 # emacs
-cmd - i : emacsclient -c
+cmd - i : emacsclient -c -a ""
 
 # emacs anywhere
 cmd + shift - i : ~/.emacs_anywhere/bin/run

@@ -103,7 +103,8 @@ yarn global add react-native-cli
 yarn global add ios-deploy
 
 # * Python
-pip3 install -r "$basedir"/requirments.txt
+pip3 install -r "$basedir"/requirements.txt
+mkdir -p ~/.virtualenvs
 
 # * Git Config Reminder
 if [[ ! -f ~/.gitconfig ]]; then
@@ -112,7 +113,7 @@ if [[ ! -f ~/.gitconfig ]]; then
 path = .gitconfig-school
 [includeIf "gitdir:~/src/emacs/**"]
 path = .gitconfig-personal
-[includeIf "gitdir:~/src/**"]
+[includeIf "gitdir:~/src/forks/**"]
 path = .gitconfig-personal
 [includeIf "gitdir:~/dotfiles/**"]
 path = .gitconfig-personal

@@ -52,6 +52,9 @@ virtualenvwrapper
 # * Testing
 pytest
 
+# * Debugging
+ptvsd
+
 # * Other
 # for importmagic.el: resolve unimported symbols
 epc

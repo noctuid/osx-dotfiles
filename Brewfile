@@ -27,6 +27,7 @@ brew "wget"
 brew "valelint/vale/vale"
 cask "osxfuse"
 cask "virtualbox"
+cask "virtualbox-extension-pack"
 
 # Window Switching
 cask "hotswitch"
@@ -80,6 +81,8 @@ brew "cask"
 brew "neovim"
 cask "visual-studio-code"
 
+brew "editorconfig"
+
 # * TeX
 # includes pdflatex
 cask "basictex"
@@ -95,3 +98,6 @@ brew "yarn"
 # ** Python
 brew "python"
 brew "ipython"
+
+# ** Lisp
+brew "roswell"
