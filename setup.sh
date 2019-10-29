@@ -10,7 +10,8 @@
 # TODO browser config
 
 basedir=$(dirname "$(realpath "$0")")
-dotfiles=https://raw.githubusercontent.com/noctuid/dotfiles/master
+rdotfiles=https://raw.githubusercontent.com/noctuid/dotfiles/master
+svn_dotfiles=https://github.com/noctuid/dotfiles/trunk
 
 # * Package Installation
 # brew seems extremely slow...
@@ -18,7 +19,6 @@ echo "Installing packages with Brew."
 brew bundle --no-upgrade || echo "Brew package installation failed."
 
 # * Emacs config
-# TODO this move, delete, then move back thing is bad; BAD
 emacs_setup() (
 	# useful here (but see http://mywiki.wooledge.org/BashFAQ/105)
 	set -e
@@ -27,31 +27,21 @@ emacs_setup() (
 
 	# brew services start d12frosted/emacs-plus/emacs-plus
 
-	if [[ -f ~/.emacs ]]; then
-		# ~/.emacs will prevent init.el from loading
-		trash ~/.emacs
-	fi
+	mkdir -p ~/.emacs.d/{lisp,straight,yasnippet/snippets}
+	curl "$rdotfiles"/emacs/.emacs.d/early-init.el > ~/.emacs.d/early-init.el
+	curl "$rdotfiles"/emacs/.emacs.d/init.el > ~/.emacs.d/init.el
+	curl "$rdotfiles"/emacs/.emacs.d/awaken.org > ~/.emacs.d/awaken.org
+	curl "$rdotfiles"/emacs/.emacs.d/lisp/noct-util.el \
+		 > ~/.emacs.d/lisp/noct-util.el
+	# TODO use lockfile once up-to-date
+	# curl "rdotfiles"/emacs/.emacs.d/straight/versions/default.el \
+		# 	 > ~/.emacs.d/straight/versions/default.el
 
-	mkdir -p ~/tmp/.emacs.d
-	if [[ -d ~/.emacs.d/straight ]]; then
-		sudo cp -Rf ~/.emacs.d/straight ~/tmp/.emacs.d/
-	fi
-	if [[ -d ~/.emacs.d/var ]]; then
-		sudo cp -Rf ~/.emacs.d/var ~/tmp/.emacs.d/
-	fi
-
-	trash ~/.emacs.d
 	# github doesn't support git-archive
 	# however, it will convert to svn repo in backend
 	# this can be used to get a specific folder
-	svn checkout https://github.com/noctuid/dotfiles/trunk/emacs/.emacs.d \
-		~/.emacs.d
-	# TODO use lockfile once up-to-date
-	trash ~/.emacs.d/straight
-
-	if [[ -d ~/tmp/.emacs.d ]]; then
-		cp -R ~/tmp/.emacs.d ~/
-	fi
+	svn checkout "$svn_dotfiles"/emacs/.emacs.d/etc/yasnippet/snippets \
+		~/.emacs.d/yasnippet/snippets
 )
 
 echo "Setting up Emacs with latest configuration."
@@ -67,10 +57,10 @@ install_emacs_anywhere() {
 install_emacs_anywhere || echo "Installing Emacs Anywhere failed."
 
 # * Shell
-curl "$dotfiles"/terminal/.zshrc > ~/.zshrc
+curl "$rdotfiles"/terminal/.zshrc > ~/.zshrc
 
 mkdir -p ~/.config/kitty
-curl "$dotfiles"/terminal/.config/kitty/kitty.conf > ~/.config/kitty/kitty.conf
+curl "$rdotfiles"/terminal/.config/kitty/kitty.conf > ~/.config/kitty/kitty.conf
 
 # * Stow
 # shellcheck disable=1090
