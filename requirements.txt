@@ -1,24 +1,21 @@
-# * Language Server
-python-language-server[all]
+# NOTE may not need all of these globally; depends on project
 
-# completions, definitions, references, etc. (included with server)
-# jedi
+# * Neovim
+# support for python plugins in nvim
+pynvim
 
-# completions and renaming (included with server[all])
-# rope
-
-# * Linting
+# * Linting (for flycheck)
 # error (included with server[all])
-# pyflakes
+pyflakes
 
 # style; previously called pep8 (included with serever[all])
-# pycodestyle
+pycodestyle
 
 # docstring style (included with serever[all])
-# pydocstyle
+pydocstyle
 
 # complexity checking (included with server[all])
-# mccabe
+mccabe
 
 # wraps pyflakes, pycodestyle, and mccabe
 flake8
@@ -26,21 +23,21 @@ flake8
 # even more warnings
 pylint
 
-# * Type Hint Checking
+# * Type Hint Checking (for flycheck)
 mypy
-pyls-mypy
 
 # * Formatting
+# (TODO needed? what does pyright have?)
+
 # sort imports
 isort
-pyls-isort
 
 # remove unused variables and imports
 autoflake
 
+# for apheleia
 # less configurable than yapf; deterministic
 black
-pyls-black
 
 # * Repl
 ptpython
@@ -55,8 +52,8 @@ pytest
 # * Debugging
 ptvsd
 
-# * Other
-# for importmagic.el: resolve unimported symbols
+# * Other for importmagic.el: resolve unimported symbols; probably no longer
+# needed with pyright
 epc
 importmagic
 
