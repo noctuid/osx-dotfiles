@@ -161,6 +161,14 @@ gitconfig_setup() {
 	fi
 }
 
+# * Github Setup
+# to be able to push this repo
+github_auth_setup() {
+	if gh auth status 2>&1 | grep --quiet "not logged in" 2> /dev/null; then
+		gh auth login || erm "Failed to set up github access token."
+	fi
+}
+
 # * Main
 setup_help() {
     echo "usage: [options] [subcommand]
@@ -188,6 +196,7 @@ all() {
 	vscode_setup
 	services_setup
 	gitconfig_setup
+	github_auth_setup
 }
 
 main() {

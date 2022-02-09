@@ -46,6 +46,9 @@ cask "hotswitch"
 # launcher
 cask "alfred"
 
+# for getting github auth token
+brew "gh"
+
 # * Remapping
 # hotkey daemon
 brew "koekeishiya/formulae/skhd", restart_service: :changed
