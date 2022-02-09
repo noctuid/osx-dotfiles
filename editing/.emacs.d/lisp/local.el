@@ -1,17 +1,12 @@
-;; temporary fix for issue with HEAD (fixed but I haven't pulled/reinstalled)
-(load "custom")
-
-;; * env variables
-;; TODO because running emacs server with launchtl, env variables not the
-;; same...; this doesn't fix
-;; (setenv "PATH" (concat "/usr/local/bin:" (getenv "PATH")))
+;; * TODO move to main config
+(gsetq mac-option-modifier 'meta)
 
 ;; * Initial Width/Height
 ;; Set default window size
-(noct:after-gui
-  (cl-pushnew '(width . 250) default-frame-alist
+(general-after-gui
+  (cl-pushnew '(width . 265) default-frame-alist
               :key #'car)
-  (cl-pushnew '(height . 65) default-frame-alist
+  (cl-pushnew '(height . 80) default-frame-alist
               :key #'car))
 
 ;; * Org
@@ -19,54 +14,69 @@
 (setq org-descriptive-links nil
       org-src-preserve-indentation t)
 
-;; * Docker
-(use-package dockerfile-mode)
-
-;; * JavasScript, TypeScript, Web
-(use-package typescript-mode
-  :gfhook #'lsp
-  :config
-  (gsetq typescript-indent-level 2))
-
-(use-package prettier-js
-  ;; :gfhook (nil (lambda () (aggressive-indent-mode -1)))
-  )
-
-(defun noct:maybe-enable-prettier ()
-  "Enable prettier in [jt]sx? file."
-  (when (and buffer-file-name
-             (string-match
-              (rx (or (seq buffer-start
-                           (or "j" "t") "s" (opt "x")
-                           buffer-end)))
-              buffer-file-name))
-    (aggressive-indent-mode -1)
-    (prettier-js-mode)))
-
-(use-package web-mode
-  ;; web-mode gives better syntax highlighting than just typescript-mode
-  :mode ("\\.[tj]sx?\\'" . web-mode)
-  ;; :gfhook (lambda ()
-  ;;           (when (string-equal "tsx" (file-name-extension buffer-file-name))
-  ;;             (setup-tide-mode)))
-  :gfhook
-  #'lsp
-  #'noct:maybe-enable-prettier
-  :config
-  (setq web-mode-code-indent-offset 2))
-
-(with-eval-after-load 'flycheck
-  ;; enable typescript-tslint checker
-  (flycheck-add-mode 'typescript-tslint 'web-mode))
-
-;; ** Eslint
-;; make use .gitignore mode
-
-;; * JSON
-(use-package json-mode
-  :gfhook (nil (lambda () (setq-local js-indent-level 2))))
-
 ;; * Python
+;; allows evaling things with absolute imports even when shell starts in subdirectory
+(defvar user2053036-python-shell-dir-setup-code
+  "import os
+home = os.path.expanduser('~')
+while os.path.isfile('__init__.py') and (os.getcwd() != home):
+    os.chdir('..')
+del os")
+
+;; TODO sys.path.append('..') all the way to dir above top module
+
+(defun user2053036-python-shell-dir-setup ()
+  (let ((process (get-buffer-process (current-buffer))))
+    (python-shell-send-string user2053036-python-shell-dir-setup-code process)))
+
+(general-add-hook 'inferior-python-mode-hook 'user2053036-python-shell-dir-setup)
+
+;; TODO importmagic
+;; NOTE microsoft python server's import action usually works
+;; (use-package pyimport)
+
 ;; since python 3 is python3 not python on OSX
 (setq flycheck-python-flake8-executable "python3"
       flycheck-python-pylint-executable "python3")
+
+;; bind `dap-debug'
+;; (use-package dap-mode
+;;   :config
+;;   (dap-mode 1)
+;;   (dap-ui-mode 1)
+;;   ;; enables mouse hover support
+;;   (dap-tooltip-mode 1)
+;;   (require 'dap-python))
+
+;; (use-package conda)
+
+;; (use-package lsp-python-ms
+;;   :init
+;;   (general-after 'python-mode
+;;     (require 'lsp-python-ms))
+;;   :config
+;;   (general-pushnew 'pyls lsp-disabled-clients)
+;;   (gsetq lsp-python-ms-python-executable-cmd "python3"
+;;          ;; use existing linting tools
+;;          lsp-python-ms-warnings []
+;;          lsp-python-ms-errors []))
+
+;; * Targets
+;; for seeing old code
+(use-package targets
+  :straight (targets
+             :type git
+             :host github
+             :repo "noctuid/targets.el"))
+
+;; * Project Specific
+;; preseed file
+(use-package conf-mode
+  :straight nil
+  :mode "\\.seed\\'")
+
+;; * Other
+(let ((local-unclean-file (expand-file-name "lisp/local-unclean.el"
+                                            user-emacs-directory)))
+  (when (file-exists-p local-unclean-file)
+    (load-file local-unclean-file)))

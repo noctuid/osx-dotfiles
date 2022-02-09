@@ -8,6 +8,7 @@ export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init --path)"
 
+export PATH="/Applications/cov-analysis-macosx-2021.03/bin/:$PATH"
 
 restartkarabiner() {
     service=org.pqrs.karabiner.karabiner_console_user_server

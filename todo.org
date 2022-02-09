@@ -1,0 +1,16 @@
+* TODO fix projectile directory discovery
+unfortunately this adds everything even if not project
+(setq projectile-project-search-path '("~/src" ("~/src" . 1)))
+(setq projectile-project-search-path '("~/" "~/src" ("~/src" . 1)))
+(setq projectile-project-search-path '("~/" "~/src"
+                                       ("~/src" . 1)
+                                       ("~/src" . 2)))
+
+* TODO company shell freezing bash
+* TODO fix shell prompt
+- commit and download ~/.p10k.zsh
+
+* TODO fix vale recipe reference
+* TODO fix macfuse
+* TODO fix emacs anywhere installation
+* TODO why does cloning from GitHub ask for username and password?

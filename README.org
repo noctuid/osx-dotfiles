@@ -1,0 +1,36 @@
+* OSX Setup Instructions
+** Manual Pre-Setup
+*** Pre Transfer
+- commit any changes here (not totally necessary since transferring this repo)
+- maybe clear build directories (e.g. isos and updates) to make ~/src size smaller
+
+*** File Transfer
+Transfer these directories (ethernet to ethernet seems blocked? could see other computer but could access):
+- dotfiles
+- src
+- Documents
+- Desktop
+
+If you have to use a usb, ideally use a usb formatted with a filesystem that won't screw up the file permissions.
+
+After the file transfer, new work should be done on new laptop.
+
+You will probably need to delete `.vagrant` folders on the new laptop before using vagrant.
+
+*** System Settings
+- dark mode
+- disable natural scroll for trackpad
+- fastest repeat rate
+- second shortest delay until repeat
+
+*** Installation
+- Install brew
+- Install poetry (recommended method is not packaged)
+- You may need to run ~xcode-select --install~; installing brew should do this, but it doesn't hurt to run again
+
+** Automatic Setup
+Run ~./pre-setup.sh~ then ~./setup.sh~. Enter password as necessary. Reboot afterwards.
+
+** Manual Post-Setup
+- Add Colemak-DH as input source (after installing karabiner)
+- Run <prefix> I to install tmux plugins (after installing/running tmux)

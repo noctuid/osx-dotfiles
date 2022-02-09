@@ -5,7 +5,8 @@ tap "homebrew/cask"
 tap "homebrew/cask-fonts"
 tap "homebrew/core"
 tap "homebrew/services"
-tap "valelint/vale"
+# TODO this recipe is broken
+# tap "valelint/vale"
 
 # * Basic Utilities
 brew "aspell"
@@ -24,6 +25,7 @@ brew "ext4fuse"
 brew "imagemagick"
 brew "ispell"
 brew "p7zip"
+brew "stow"
 brew "trash"
 brew "wget"
 brew "valelint/vale/vale"
@@ -46,8 +48,7 @@ cask "alfred"
 
 # * Remapping
 # hotkey daemon
-# TODO why does this work with brew install but fail with brew bundle??
-cask "koekeishiya/formulae/skhd", restart_service: :changed
+brew "koekeishiya/formulae/skhd", restart_service: :changed
 
 # remapping
 cask "karabiner-elements"
@@ -57,15 +58,14 @@ cask "ukelele"
 
 # * Browsers
 # currently installed manually
-# cask "firefox"
+cask "firefox"
+# pre-installed
 # cask "google-chrome"
 
 # * Fonts
 cask "font-office-code-pro"
-# cask "font-fira-code"
-cask "font-firacode-nerd-font-mono"
-# cask "font-fira-mono"
-cask "font-firamono-nerd-font-mono"
+cask "font-fira-code-nerd-font"
+cask "font-fira-mono-nerd-font"
 
 # * Shells
 brew "fish"
@@ -94,7 +94,7 @@ brew "ripgrep"
 # or with-modern-black-dragon-icon
 brew "emacs-plus@28", args: ["with-modern-doom3-icon", "with-native-comp"]
 # required to grab specific emacs config files from github
-brew svn
+brew "svn"
 
 # https://github.com/railwaycat/homebrew-emacsmacport/issues/174
 # child frame borders work; emoji support; horrible focus switching issues
@@ -103,7 +103,8 @@ brew svn
 # emacs-mac is generally considered better but not if you need the latest Emacs
 
 # Emacs package management tool
-brew "cask"
+# TODO conflicts with emacs-plus?
+# brew "cask"
 brew "neovim"
 cask "visual-studio-code"
 
