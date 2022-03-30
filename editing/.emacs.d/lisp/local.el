@@ -1,4 +1,5 @@
 ;; * TODO move to main config
+;; TODO in main configuration, remove on next pull
 (gsetq mac-option-modifier 'meta)
 
 ;; * Initial Width/Height
@@ -48,19 +49,6 @@ del os")
 ;;   (dap-tooltip-mode 1)
 ;;   (require 'dap-python))
 
-;; (use-package conda)
-
-;; (use-package lsp-python-ms
-;;   :init
-;;   (general-after 'python-mode
-;;     (require 'lsp-python-ms))
-;;   :config
-;;   (general-pushnew 'pyls lsp-disabled-clients)
-;;   (gsetq lsp-python-ms-python-executable-cmd "python3"
-;;          ;; use existing linting tools
-;;          lsp-python-ms-warnings []
-;;          lsp-python-ms-errors []))
-
 ;; * Targets
 ;; for seeing old code
 (use-package targets
@@ -75,8 +63,50 @@ del os")
   :straight nil
   :mode "\\.seed\\'")
 
+;; * Quickmarks
+(general-after-init
+  (general-after 'dired
+    (general-def 'normal dired-mode-map
+      :prefix "'"
+      "V" (noct-find-file "/Volumes/")
+      "v" (noct-find-file "~/src/jabberwocky/vertexhmi/")
+      "b" (noct-find-file "~/src/jabberwocky/vertexhmi/backend/")
+      "u" (noct-find-file "~/src/jabberwocky/vertexhmi/ubuntu-installer/")
+      "j" (noct-find-file "~/src/jabberwocky/vertexhmi/vertexjs/")
+      "r" (noct-find-file "~/src/jabberwocky/vertex-refresh/chemcam/"))))
+
 ;; * Other
 (let ((local-unclean-file (expand-file-name "lisp/local-unclean.el"
                                             user-emacs-directory)))
   (when (file-exists-p local-unclean-file)
     (load-file local-unclean-file)))
+
+;; * Messing with alternate F
+;; experimental
+(general-def 'motion
+  "f" #'evil-avy-goto-word-1)
+
+;; * Update Path
+;; TODO in main configuration, remove on next pull
+(use-package exec-path-from-shell
+  ;; TODO decide how to load
+  :defer 3
+  :config
+  ;; make `exec-path' match shell path in GUI Emacs
+  ;; e.g. so poetry in path
+  (when (memq window-system '(mac ns x))
+    (gsetq exec-path-from-shell-shell-name "bash")
+    (gsetq exec-path-from-shell-arguments '("-l"))
+    ;; takes about 0.1s
+    (exec-path-from-shell-initialize)))
+
+
+;; what is lsp-dired-mode?
+;; consult lsp?
+;; ind lsp-iedit-linked-ranges or lsp-evil-multiedit-ranges
+
+;; https://github.com/remarkjs/remark-language-server
+;; https://github.com/tamasfe/taplo
+;; https://emacs-lsp.github.io/lsp-mode/page/lsp-json/
+;; https://github.com/valentjn/ltex-ls for org, latex, text (grammar/spelling)
+;; https://emacs-lsp.github.io/lsp-mode/page/lsp-pwsh/

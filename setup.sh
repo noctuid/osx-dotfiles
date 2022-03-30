@@ -128,7 +128,7 @@ services_setup() {
 # * Git Config Setup
 gitconfig_setup() {
 	if [[ ! -f ~/.gitconfig ]] || ! grep --quiet email ~/.gitconfig; then
-		echo "Enter the email address to use for git:"
+		echo "Enter the email address to normally use for git:"
 		read -r email
 		echo "[user]
 	name = Fox Kiester
