@@ -48,9 +48,9 @@ yarn_global_install() {
 }
 
 # ** Pip
-pip_global_install() {
-	pip3 install -r "$basedir"/requirements.txt
-	mkdir -p ~/.virtualenvs
+pipx_install() {
+	pipx ensurepath
+	pipx install hatch
 }
 
 # * Emacs config
@@ -188,7 +188,7 @@ options:
 all() {
 	install_packages
 	yarn_global_install
-	pip_global_install
+	pipx_install
 	emacs_setup || errm "Emacs setup failed."
 	install_emacs_anywhere || errm "Installing Emacs Anywhere failed."
 	shell_config_setup

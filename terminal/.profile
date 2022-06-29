@@ -16,6 +16,6 @@ if tty -s; then
     source "$(brew --prefix nvm)"/nvm.sh
 fi
 
-export PATH="/Applications/cov-analysis-macosx-2021.03/bin/:$PATH"
+export PATH="/Applications/cov-analysis-macosx-2021.12.2/bin:$PATH"
 
 export PATH="$HOME/.poetry/bin:$PATH"

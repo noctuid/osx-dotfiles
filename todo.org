@@ -1,3 +1,7 @@
+* TODO shared utils
+# - stow in terminal/.zsh/stow_functions.sh (which is stowed) - changed mind, keep separate
+- add submodule and remove duplicate functions in setup.sh
+
 * TODO fix projectile directory discovery
 unfortunately this adds everything even if not project
 (setq projectile-project-search-path '("~/src" ("~/src" . 1)))

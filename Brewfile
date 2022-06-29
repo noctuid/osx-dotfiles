@@ -5,6 +5,7 @@ tap "homebrew/cask"
 tap "homebrew/cask-fonts"
 tap "homebrew/core"
 tap "homebrew/services"
+tap "clojure-lsp/brew"
 # TODO this recipe is broken
 # tap "valelint/vale"
 
@@ -69,6 +70,7 @@ cask "firefox"
 cask "font-office-code-pro"
 cask "font-fira-code-nerd-font"
 cask "font-fira-mono-nerd-font"
+cask "font-delugia-complete"
 
 # * Shells
 brew "fish"
@@ -121,6 +123,10 @@ cask "basictex"
 # ** Bash
 brew "shellcheck"
 
+# * Clojure
+leiningen
+clojure-lsp-native
+
 # ** Javascript/Typescript
 brew "node"
 brew "yarn"
@@ -131,6 +137,7 @@ brew "python"
 brew "ipython"
 # language server
 brew "pyright"
+brew "pipx"
 
 # ** Lisp
 brew "roswell"
