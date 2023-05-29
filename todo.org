@@ -1,8 +1,64 @@
-* TODO shared utils
-# - stow in terminal/.zsh/stow_functions.sh (which is stowed) - changed mind, keep separate
-- add submodule and remove duplicate functions in setup.sh
+* Most Important
+** TODO fix dirvish directory preview
+Some issue with insert-directory-program and switches
 
-* TODO fix projectile directory discovery
+* Important but need actual laptop to test
+** TODO yabai consistency issues
+Does it work well
+- is emacs /always/ tiled (it is only usually tiled in VM, but yabai is very slow to make changes in VM)
+- https://github.com/koekeishiya/yabai/issues/86
+- https://github.com/koekeishiya/yabai/issues/587
+
+** TODO Multi-monitor support
+For yabai "displays have separate spaces must be enabled".  Some workaround will be necessary
+- e.g. keybinding that changes displays also moves all spaces or at least space to focus
+- https://github.com/koekeishiya/yabai/issues/1679
+- dashboard in overlay setting
+
+** TODO find key for printscreen
+
+** TODO Install kitty/wezterm through nix?
+Is nixgl needed?
+Is it a good idea?
+
+** TODO What happens when yabai sa fails?
+Does yabai still start correctly?
+
+* Very Nice
+** TODO Basic Appearance
+- don't show anything on desktop
+- need script that checks screen dimensions
+- yabai padding and borders and their colors
+- pick wallpaper
+
+*** sketchybar
+
+*** pywal
+Make sure PR is to fix on mac is in version using
+For managing bar, yabai, etc. colors
+- vfox script
+- create pywal template for tridacytl instead (will just be included in pywal_pull)
+
+*** Fewer title bars
+Application-specific on mac
+- https://github.com/koekeishiya/yabai/issues/241
+- https://github.com/w0lfschild/winBuddy/issues/34
+
+* Nice
+** TODO try programs
+- https://github.com/leits/MeetingBar
+- https://apps.apple.com/us/app/amphetamine/id937984704?mt=12
+ or caffeine or keeping you awak
+- https://github.com/FelixKratz/SketchyVim (libvim not neovim)
+
+** TODO osx optimizer
+https://github.com/sickcodes/osx-optimizer
+- not all of this is relevant or a good idea
+
+** TODO Notification keybindings?
+- need to find some up-to-date applescript for clearing and pulling up notification center
+
+** TODO Fix projectile directory discovery
 unfortunately this adds everything even if not project
 (setq projectile-project-search-path '("~/src" ("~/src" . 1)))
 (setq projectile-project-search-path '("~/" "~/src" ("~/src" . 1)))
@@ -10,11 +66,27 @@ unfortunately this adds everything even if not project
                                        ("~/src" . 1)
                                        ("~/src" . 2)))
 
-* TODO company shell freezing bash
-* TODO fix shell prompt
-- commit and download ~/.p10k.zsh
+** WAITING Kanata
+- key to enable (e.g. off by default), disable, and restart
+- home row modifiers due to lack of thumbkeys?
 
-* TODO fix vale recipe reference
-* TODO fix macfuse
-* TODO fix emacs anywhere installation
-* TODO why does cloning from GitHub ask for username and password?
+** MAYBE Basic hammerspoon dropdown script
+- just max with yabai
+
+* Not Vital (and some possibly already fixed)
+** MAYBE Redshift equivalent
+Just use builtin?  Can configure through nix darwin?
+
+** MAYBE ranger setup
+Start with just dirvish
+
+** TODO Warpd and click script
+Just pull click script as-is?
+
+** TODO Playerctl daemon setup
+
+** TODO Fix macfuse
+** TODO OSX -> macOS
+** TODO Change Emacs icon
+** VERIFY company shell freezing bash
+** TODO Fix vale recipe reference

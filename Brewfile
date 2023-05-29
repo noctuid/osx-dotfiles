@@ -1,3 +1,6 @@
+# NOTE this is currently for backup only
+# plan on removing
+
 # * Taps
 tap "d12frosted/emacs-plus"
 tap "homebrew/bundle"

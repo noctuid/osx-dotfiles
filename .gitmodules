@@ -1,0 +1,3 @@
+[submodule "setup-utils"]
+	path = setup-utils
+	url = https://github.com/noctuid/dotfiles-setup-utils.git

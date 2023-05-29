@@ -1,0 +1,173 @@
+# * Reloading
+# skhd hot-reloads by default; may not work if running through nix-darwin:
+# https://github.com/LnL7/nix-darwin/issues/333
+# I couldn't seem to get it to work running manually installed through nix
+# either
+# .
+cmd + ctrl - 0x2F : skhd -r
+
+# * General Global Hotkeys
+# ** TODO Brightness
+# TODO control external display brightness as well?
+# https://github.com/nriley/brightness
+# https://github.com/kfix/ddcctl
+# try lunar cli
+# https://github.com/alin23/Lunar
+# brightness or illumination?
+# brightness_down :
+# brightness_up :
+
+# ** Media/Volume
+# volume keys should just work
+
+# may be useful for browser videos
+cmd + ctrl - o : playerctl play-pause
+
+# ** Screenshots
+# ~/bin/screenshot
+# Print; TODO find the right key for printscreen
+# 0x69 : screenshot
+
+cmd + ctrl - q : screenshot select
+
+cmd + ctrl - w : screenshot window
+
+# ** Terminals, Dropdowns, etc.
+cmd + ctrl - return : wezterm
+
+# not too hard to minimize/unmimize with yabai:
+# https://github.com/koekeishiya/yabai/issues/657
+# but need an equivalent of tdrop's create win return wid first...
+# for now just use keybindings that will behave the same if you close the window
+# and then run them again
+
+# cmd + ctrl + s : max_dropdown wezterm connect unix
+cmd + ctrl - s : wezterm connect unix
+# dropdown emacsclient -c -e "(let (display-buffer-alist) (vterm) (delete-other-windows))"
+
+cmd + ctrl - c : wezterm connect --workspace longcommands unix
+# semicolon
+cmd + ctrl - 0x29 : emacsclient -ce '(noct-with-reuse-window (noct-vterm-select-or-create "long"))'
+
+# unfortunately ranger does not have wezterm image preview support, and ueberzug
+# does not work with wezterm multiplexing
+cmd + ctrl - r : wezterm start --workspace ranger zsh -c "ranger; zsh -i"
+cmd + ctrl - d : emacsclient --socket-name=dirvish -ce "(dirvish)"
+
+cmd + ctrl - p : emacsclient -ce "(noct-with-q-to-exit (proced) (delete-other-windows))"
+
+# shell command menu for linux, but the only useful command on macOS is currently capture
+cmd - space : emacsclient -ce "(noct-with-reuse-window (org-capture))"
+
+# [k]alc
+cmd + ctrl - k : emacsclient -ce "(progn (calc) (delete-other-windows))"
+
+# slash
+cmd + ctrl - 0x2C : emacsclient -ce "(noct-with-global-completing-read (woman))"
+
+# ** Other Program Hotkeys
+cmd + ctrl - t : open_app_for_space
+
+# launcher
+cmd + ctrl - space : open -a Raycast
+cmd + ctrl - backspace : open -a Raycast
+
+cmd + ctrl - i : emacsclient --eval "(emacs-everywhere)"
+cmd + ctrl + alt - t : emacs --stable
+cmd + ctrl + alt - d : emacs --with-demoted-errors
+
+# run or raise Firefox
+cmd + ctrl - f : open -a Firefox
+
+# ** Clicks and Mouse Movement
+# TODO needs warpd
+cmd + ctrl - h : warpd --hint
+
+cmd + ctrl - j : warpd --hint2
+
+# TODO need click script
+# cmd + ctrl + alt - c : click middle
+
+# regain focus from browser media
+cmd + ctrl - a : click left
+
+# banish mouse to bottom left
+cmd + ctrl - b : click 0 90000
+
+# ** TODO Notifications
+# clear notifications
+# open notification center
+
+# ** Miscellaneous
+# TODO
+cmd + ctrl - b : lockscreen
+
+# open mpv
+cmd + ctrl - m : open -na /Applications/mpv.app $(pbpaste)
+
+# * Yabai
+cmd + ctrl - escape : yabai --restart-service
+# .
+cmd + ctrl - 0x2F : yabai --restart-service
+
+# ** Window Keybindings
+cmd - w : yabai -m window --close
+
+cmd - k : yabei down
+cmd - u : yabei left
+cmd - y : yabei right
+# ;
+cmd - 0x29 : yabei up
+
+cmd + shift - k : yabai -m window --swap south
+cmd + shift - u : yabai -m window --swap west
+cmd + shift - y : yabai -m window --swap east
+cmd + shift - 0x29 : yabai -m window --swap north
+
+# maintain current size instead of taking other window's size
+# cmd + shift - l : yabai -m window --warp south
+# cmd + shift - u : yabai -m window --warp west
+# cmd + shift - y : yabai -m window --warp east
+# cmd + shift - 0x29 : yabai -m window --warp north
+
+cmd - v : yabai -m window --toggle float
+cmd - c : yabai -m window --toggle sticky
+cmd - m : yabei toggle_layout
+cmd - b : yabai -m space --balance
+
+cmd - f : yabai -m window --toggle zoom-fullscreen
+cmd - z : yabai -m window --toggle zoom-parent
+
+# ** Space Keybindings
+# use labels so don't have to rely on order (which mac can change... fullscreen
+# windows will change, manually created spaces, etc.)
+cmd - a : yabai -m space --focus one
+cmd - r : yabai -m space --focus two
+cmd - s : yabai -m space --focus three
+cmd - t : yabai -m space --focus four
+cmd - d : yabai -m space --focus five
+cmd - h : yabai -m space --focus six
+cmd - n : yabai -m space --focus seven
+cmd - e : yabai -m space --focus eight
+cmd - i : yabai -m space --focus nine
+cmd - o : yabai -m space --focus ten
+
+cmd - l : yabai -m space --focus recent
+
+cmd + shift - a : yabai -m window --space one
+cmd + shift - r : yabai -m window --space two
+cmd + shift - s : yabai -m window --space three
+cmd + shift - t : yabai -m window --space four
+cmd + shift - d : yabai -m window --space five
+cmd + shift - h : yabai -m window --space six
+cmd + shift - n : yabai -m window --space seven
+cmd + shift - e : yabai -m window --space eight
+cmd + shift - i : yabai -m window --space nine
+cmd + shift - o : yabai -m window --space ten
+
+# ** Display Keybindings
+# ,
+cmd - 0x2B : yabei display_cycle
+
+# ** TODO Gap Adjustment
+# https://github.com/koekeishiya/yabai/wiki/Commands#modify-padding-and-gaps

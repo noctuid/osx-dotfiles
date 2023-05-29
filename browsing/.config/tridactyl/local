@@ -1,0 +1,36 @@
+" * Appearance
+colorscheme quakelight
+
+" * Browser Settings
+" stay in normal mode when loading a new page
+setpref browser.autofocus false
+" allow tridactyl on more domains
+setpref extensions.webextensions.restrictedDomains ""
+
+" restore session on startup (not default)
+setpref browser.startup.page 3
+
+" download without asking where to download to (looks like default)
+" setpref browser.download.useDownloadDir true
+
+" * Keybindings
+" needed on mac; can use mode browser to make them global (works even on pages
+" where tridactyl doesn't)
+bind --mode=browser <c-w> tabclose
+bind --mode=browser <c-t> tabopen
+
+bind --mode=ex <c-BS> text.backward_kill_word
+bind --mode=input <c-BS> text.backward_kill_word
+bind --mode=insert <c-BS> text.backward_kill_word
+
+" not sure why needed on mac, but it is
+bind --mode=ex <Home> text.beginning_of_line
+bind --mode=input <Home> text.beginning_of_line
+bind --mode=insert <Home> text.beginning_of_line
+bind --mode=ex <End> text.end_of_line
+bind --mode=input <End> text.end_of_line
+bind --mode=insert <End> text.end_of_line
+
+" Local Variables:
+" mode: vimrc
+" End:

@@ -1,36 +1,25 @@
 * OSX Setup Instructions
 ** Manual Pre-Setup
-*** Pre Transfer
-- commit any changes here (not totally necessary since transferring this repo)
-- maybe clear build directories (e.g. isos and updates) to make ~/src size smaller
+- Install brew (see =./pre-setup.sh=)
+  - The first thing brew does is to install the Xcode command-line utilities (these are needed for other things as well); if you do not get a popup, manually run ~xcode-select --install~
+- Install nix (=./pre-setup.sh=)
+- Optionally follow yabai setup instructions if you want to be able to manipulate spaces
 
-*** File Transfer
-Transfer these directories (ethernet to ethernet seems blocked? could see other computer but could access):
-- dotfiles
-- src
-- Documents
-- Desktop
-
-If you have to use a usb, ideally use a usb formatted with a filesystem that won't screw up the file permissions.
-
-After the file transfer, new work should be done on new laptop.
-
-You will probably need to delete `.vagrant` folders on the new laptop before using vagrant.
-
-*** System Settings
-- dark mode
-- disable natural scroll for trackpad
-- fastest repeat rate
-- second shortest delay until repeat
-
-*** Installation
-- Install brew
+Optional (haven't decided on best way to install poetry, currently installing through nix):
 - Install poetry (recommended method is not packaged)
-- You may need to run ~xcode-select --install~; installing brew should do this, but it doesn't hurt to run again
 
 ** Automatic Setup
-Run ~./pre-setup.sh~ then ~./setup.sh~. Enter password as necessary. Reboot afterwards.
+Run ~./pre-setup.sh~ then ~./setup.sh~.  Enter password as necessary.  Reboot afterwards.  After the initial setup, ~dots~ can be used to run =setup.sh= from anywhere.  See ~dots --help~ for more information.
 
 ** Manual Post-Setup
+- Run ~p10k configure~ to fully set up shell prompt; I've decided to continue to do this rather than store the generated file in my dotfiles; it is very quick, and I might want slightly different behavior for different computers
+
+If you are using karabiner for keyboard layout:
 - Add Colemak-DH as input source (after installing karabiner)
+
+If you are using tmux (currently not):
 - Run <prefix> I to install tmux plugins (after installing/running tmux)
+
+Also install firefox/addons including tridactyl.
+- Run ~:installnative~ and follow instructions
+- ~:source ~~/.config/tridactyl/tridactylrc~ and restart firefox (necessary for setprefs to take affect and start saving browser session)

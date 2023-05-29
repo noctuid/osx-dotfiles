@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+screenshot_dir=~/Desktop/screenshots/
+timestamp=$(date +%FT%T)
+title=$(osascript -e 'tell application "System Events" to tell (first process whose frontmost is true) to return name of window 1')
+# title=$(yabai -m query --windows --window | jq '.title')
+# remove punctuation (e.g. "/") and replace whitespace with underscores
+sane_title=$(echo "$title" | \
+	gawk '{gsub(/[[:punct:]]/, "") gsub(/\s/, "_"); print $0}')
+
+prefix="$screenshot_dir$timestamp"
+if [[ $1 == window ]]; then
+	path=${prefix}_-_$sane_title.png
+else
+	path=$prefix.png
+fi
+echo "$path" | pbcopy
+
+mkdir -p "$screenshot_dir"
+
+case $1 in
+    select) screencapture -i "$path";;
+    window) screencapture -w "$path";;
+	*) screencapture "$path";;
+esac

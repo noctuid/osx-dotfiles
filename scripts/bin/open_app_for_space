@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+label=$(yabai -m query --spaces --space | jq --raw-output '.label')
+case $label in
+    one) open -a 'Microsoft Outlook';;
+    two) emacsclient -c;;
+	three) open -a Firefox;;
+	four) open -a 'Google Chrome';;
+	six) open -a 'zoom.us';;
+	seven) open -a 'Microsoft Teams';;
+    *) emacsclient -c;;
+esac

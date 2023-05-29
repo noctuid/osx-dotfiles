@@ -1,0 +1,48 @@
+#!/usr/bin/env bash
+
+yabai_left() {
+	yabai -m window --focus west \
+		|| yabai -m window --focus stack.prev \
+		|| yabai -m window --focus stack.last \
+		|| yabai -m window --focus recent \
+		|| yabai -m window --focus largest
+}
+
+yabai_down() {
+	yabai -m window --focus south \
+		|| yabai -m window --focus stack.prev \
+		|| yabai -m window --focus stack.last \
+		|| yabai -m window --focus recent \
+		|| yabai -m window --focus largest
+}
+
+yabai_up() {
+	yabai -m window --focus north \
+		|| yabai -m window --focus stack.next \
+		|| yabai -m window --focus stack.first \
+		|| yabai -m window --focus recent \
+		|| yabai -m window --focus largest
+}
+
+yabai_right() {
+	yabai -m window --focus east \
+		|| yabai -m window --focus stack.next \
+		|| yabai -m window --focus stack.first \
+		|| yabai -m window --focus recent \
+		|| yabai -m window --focus largest
+}
+
+yabai_toggle_layout() {
+	current=$(yabai -m query --spaces --space | jq --raw-output '.type')
+	if [[ $current == stack ]]; then
+		yabai -m space --layout bsp
+	else
+		yabai -m space --layout stack
+	fi
+}
+
+yabai_display_cycle() {
+	yabai -m display --select next || yabai -m display --select first
+}
+
+"yabai_$1" 2> /dev/null
