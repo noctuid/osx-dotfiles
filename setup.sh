@@ -85,6 +85,7 @@ all() {
 	shell_pull
 	browser_pull
 	pywal_pull
+	python_pull
 
 	# vscode_setup
 
