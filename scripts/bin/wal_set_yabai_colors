@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+# shellcheck disable=SC2154
+
+if [[ -f ~/.cache/wal/colors.sh ]]; then
+	# shellcheck disable=SC1090
+	source ~/.cache/wal/colors.sh
+
+	# yellow for active borders
+    yabai -m config active_window_border_color "0xFF${color3//\#}"
+    yabai -m config normal_window_border_color "0xFF${background//\#}"
+    # green
+    yabai -m config insert_feedback_color "0xFF${color10//\#}"
+fi

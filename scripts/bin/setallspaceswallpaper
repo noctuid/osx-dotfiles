@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+wallpaper=$1
+declare -a spaces=(one two three four five six seven eight nine ten)
+
+echo "Setting wallpaper for all spaces to $wallpaper"
+
+original_space=$(yabai -m query --spaces --space | jq --raw-output ".id")
+for space in "${spaces[@]}"; do
+    yabai -m space --focus "$space"
+    wallpaper set "$wallpaper"
+done
+yabai -m space --focus "$original_space"
+
+ln -sf "$wallpaper" ~/.cache/wallpaper

@@ -55,6 +55,30 @@ no_reopen_setup() {
 	sudo chmod 000 ~/Library/Preferences/ByHost/com.apple.loginwindow*
 }
 
+# * Pywal Setup
+# necessary because release version of pywal is very broken
+pywal_setup() {
+	if ! hash wal 2> /dev/null; then
+		pipx install git+https://github.com/dylanaraps/pywal.git
+	fi
+	if ! pipx list | grep --quiet 'pywalfox'; then
+		pipx install pywalfox
+		pywalfox install
+	fi
+	if [[ ! -d ~/.cache/wal ]]; then
+		pywal_gruvbox
+	fi
+}
+
+# https://github.com/dylanaraps/pywal/issues/668
+pywal_gruvbox() {
+	walset --theme base16-gruvbox-soft "$basedir"/mac-wallpapers/gruv.jpg
+}
+
+pywal_rose_pine() {
+	walset --theme rose-pine-hybrid "$basedir"/mac-wallpapers/pixelmoon.png
+}
+
 # * Main
 setup_help() {
     echo "usage: [options] [subcommand]
@@ -95,6 +119,8 @@ all() {
 	stow_dotfiles
 
 	no_reopen_setup
+
+	pywal_setup
 }
 
 _main() {

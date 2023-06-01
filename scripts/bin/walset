@@ -1,0 +1,44 @@
+#!/usr/bin/env bash
+wallpaper=$(realpath "${@: -1}")
+
+if [[ $1 == --theme ]]; then
+	# use walset with a pre-existing theme rather than generating one from the
+	# wallpaper (e.g. when using)
+
+	# example themes:
+	# base16-gruvbox-medium
+	# gruvbox
+	# base16-gruvbox-soft
+	# base16-gruvbox-hard
+	# base16-gruvbox-pale
+	# base16-nord
+
+	theme=$2
+	shift 2
+fi
+
+if [[ -n $theme ]]; then
+	"Applying colors for theme $theme"
+	wal --theme "$theme"
+else
+	"Applying colors for wallpaper $wallpaper"
+	wal -n -i "$wallpaper"
+fi
+
+setallspaceswallpaper "$wallpaper"
+
+# update yabai colors
+wal_set_yabai_colors
+
+echo "Setting Emacs colors"
+emacsclient -a false -e t &> /dev/null \
+	&& emacsclient --eval '(noct-ewal)' &> /dev/null &
+emacsclient -socket-name=dirvish -a false -e t &> /dev/null \
+	&& emacsclient -socket-name=dirvish --eval '(noct-ewal)' &> /dev/null &
+emacsclient -socket-name=shell-menu -a false -e t &> /dev/null \
+	&& emacsclient -socket-name=shell-menu --eval '(noct-ewal)' &> /dev/null &
+
+echo "Setting pywalfox colors"
+if hash pywalfox 2> /dev/null; then
+	pywalfox update &
+fi

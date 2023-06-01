@@ -2,6 +2,11 @@
 # https://github.com/koekeishiya/dotfiles/blob/master/yabai/yabairc
 # https://github.com/koekeishiya/yabai/blob/master/examples/yabairc
 
+# shellcheck disable=SC1090
+source ~/.profile
+# shellcheck disable=SC1090
+source ~/bin/helpers.sh
+
 # * Tiling Behavior
 # stack/monocle by default
 yabai -m config layout stack
@@ -29,29 +34,20 @@ yabai -m config window_shadow on
 # window_animation_frame_rate [<integer number>]
 
 # ** Sizing
-# TODO this is based on 4k, make it adaptive
-# border=3
-border=7
-# padding=15
-padding=30
-radius=$(echo "(0.5 * $padding) / 1" | bc)
+yabai -m config window_border_width "$WM_BORDER"
 
-yabai -m config window_border_width "$border"
+yabai -m config window_border_radius "$CORNER_RADIUS"
 
-yabai -m config window_border_radius "$radius"
+yabai -m config top_padding    "$WM_GAP"
+yabai -m config bottom_padding "$WM_GAP"
+yabai -m config left_padding   "$WM_GAP"
+yabai -m config right_padding  "$WM_GAP"
+yabai -m config window_gap     "$WM_GAP"
 
-yabai -m config top_padding    "$padding"
-yabai -m config bottom_padding "$padding"
-yabai -m config left_padding   "$padding"
-yabai -m config right_padding  "$padding"
-yabai -m config window_gap     "$padding"
-
-# yabai -m config all:40:0 external_bar
+# yabai -m config all:"$TOP_PADDING":0 external_bar
 
 # ** Color
-# active_window_border_color [0xAARRGGBB]
-# normal_window_border_color [0xAARRGGBB]
-# insert_feedback_color [0xAARRGGBB]
+wal_set_yabai_colors
 
 # * Rules
 # https://github.com/koekeishiya/yabai/wiki/Commands#automation-with-rules-and-signals
@@ -71,3 +67,11 @@ yabai -m space --create 7 --label seven
 yabai -m space --create 8 --label eight
 yabai -m space --create 9 --label nine
 yabai -m space --create 10 --label ten
+
+# * Wallpaper
+# TODO is this necessary?
+# wal -R -n
+if [[ -f ~/.cache/wallpaper ]]; then
+	setallspaceswallpaper ~/.cache/wallpaper
+fi
+
