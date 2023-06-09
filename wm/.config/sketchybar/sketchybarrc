@@ -1,0 +1,175 @@
+#!/usr/bin/env bash
+# * Other Bars
+# - https://github.com/cmacrae/spacebar
+#   - based on bar yabai used to have (and sketchy in turn started from)
+#   - very lacking in customization
+# - https://github.com/blahsd/snwe - dead
+# - https://github.com/felixhageloh/uebersicht
+#   - https://github.com/Jean-Tinland/simple-bar
+#     - not completely customizable; would have gone with if sketchy didn't exist
+#   - https://github.com/zzzeyez/pecan - not as pretty
+
+# I don't completely love how sketchybar is configured, but it is insanely
+# flexible; it's the clear winner
+
+# * Links
+# docs:
+# https://felixkratz.github.io/SketchyBar/setup
+
+# default config:
+# https://github.com/FelixKratz/SketchyBar/blob/master/sketchybarrc
+
+# setups:
+# https://github.com/FelixKratz/SketchyBar/discussions/47
+
+# plugins:
+# https://github.com/FelixKratz/SketchyBar/discussions/12
+
+# some standouts
+# - https://github.com/FelixKratz/SketchyBar/discussions/47#discussioncomment-4470393
+# - https://github.com/FelixKratz/SketchyBar/discussions/47#discussioncomment-4585669
+# - https://github.com/FelixKratz/dotfiles
+
+# * Setup
+basedir=$(dirname "$(realpath "$0")")
+itemsdir="$basedir"/items
+PLUGIN_DIR="$basedir"/plugins
+
+# shellcheck disable=SC1090
+source ~/bin/helpers.sh
+# shellcheck disable=SC1090
+source "$basedir"/colors.sh
+
+# * Bar Settings
+bar=(
+	position=top
+	# 25 is default
+	height="${BAR_HEIGHT:-25}"
+	padding_left="$HALF_PADDING"
+	padding_right="$HALF_PADDING"
+	color="$background"
+	shadow=off
+	# prevents bar flickering when switching spaces
+	# NOTE: slow if not using yabai for space switching
+	# https://github.com/FelixKratz/SketchyBar/issues/220
+	sticky=on
+	# can't get default menubar to show up with this
+	# topmost=on
+	# no border for now
+	# border_width=$BORDER_WIDTH
+	# border_color="$yellow"
+)
+
+sketchybar --bar "${bar[@]}"
+
+# * Default Item Settings
+REGULAR="Font Awesome 6 Free:Regular:12.0"
+SOLID="Font Awesome 6 Free:Solid:12.0"
+BRANDS="Font Awesome 6 Brands:Regular:12.0"
+BRANDS_BIGGER="Font Awesome 6 Brands:Regular:14.0"
+export BRANDS SOLD REGULAR BRANDS_BIGGER
+
+defaults=(
+	updates=when_shown
+	label.font="Delugia:Normal:12.0"
+	icon.font="$SOLID"
+	label.color="$foreground"
+	icon.color="$foreground"
+	icon.highlight_color="$foreground"
+	padding_left="$HALF_PADDING"
+	padding_right="$HALF_PADDING"
+)
+
+sketchybar --default "${defaults[@]}"
+
+# * Left
+sketchybar --add item apple.logo left \
+		   --set apple.logo \
+		   icon= \
+		   icon.color="$red" \
+		   icon.font="$BRANDS_BIGGER" \
+		   background.padding_left=0 \
+		   icon.padding_left=0 \
+		   label.drawing=off
+
+source "$itemsdir"/spaces.sh
+
+sketchybar -m \
+		   --add item yabai_layout left \
+		   --set yabai_layout \
+		   icon.padding_right="$HALF_PADDING" \
+		   update_freq=3 \
+		   script="$PLUGIN_DIR/yabai_layout.sh" \
+		   --add event yabai_layout_change \
+		   --subscribe yabai_layout \
+		   space_change \
+		   yabai_layout_change \
+		   yabai_window_created \
+		   yabai_window_destroyed \
+		   yabai_window_moved_space
+
+# * Middle
+# alternative until add zscroll
+sketchybar -m \
+		   --add item title center \
+		   --set title script="$PLUGIN_DIR/title.sh" label.color="$yellow" \
+		   --subscribe title front_app_switched
+
+# * Right
+# have to do in reverse order
+sketchybar -m \
+		   --add item date right \
+		   --set date \
+		   icon="" \
+		   icon.color="$green" \
+		   icon.padding_right="$HALF_PADDING" \
+		   update_freq=5 \
+		   script="$PLUGIN_DIR/date.sh"
+
+# TODO maybe wifi, vpn, etc. status
+
+# TODO maybe input
+
+sketchybar -m \
+		   --add item volume right \
+		   --set volume \
+		   script="$PLUGIN_DIR/volume.sh" \
+		   --subscribe volume volume_change
+
+sketchybar -m \
+		   --add item battery right \
+		   --set battery \
+		   icon.padding_right="$HALF_PADDING" \
+		   script="$PLUGIN_DIR/battery.sh" \
+		   update_freq=10
+
+sketchybar -m \
+		   --add item cpu_percent right \
+		   --set cpu_percent \
+		   icon="" \
+		   icon.color="$magenta" \
+		   icon.padding_right="$HALF_PADDING" \
+		   script="$PLUGIN_DIR/cpu.sh" \
+		   update_freq=3
+
+sketchybar -m \
+		   --add item ram right \
+		   --set ram \
+		   icon="" \
+		   icon.color="$magenta" \
+		   icon.padding_right="$HALF_PADDING" \
+		   script="$PLUGIN_DIR/ram.sh" \
+		   update_freq=3
+
+# 
+sketchybar -m \
+		   --add item disk right \
+		   --set disk \
+		   icon="" \
+		   icon.color="$magenta" \
+		   icon.padding_right="$HALF_PADDING" \
+		   script="$PLUGIN_DIR/disk.sh" \
+		   update_freq=30
+
+# * Finalize
+sketchybar -m --update

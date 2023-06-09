@@ -16,17 +16,15 @@ For yabai "displays have separate spaces must be enabled".  Some workaround will
 - dashboard in overlay setting
 
 ** TODO find key for printscreen
-
-** TODO Install kitty/wezterm through nix?
-Is nixgl needed?
-Is it a good idea?
+- and make it so can easily then share
 
 ** TODO What happens when yabai sa fails?
 Does yabai still start correctly?
 
+** TODO [#B] try luna
+
 * Very Nice
 ** TODO Basic Appearance
-*** sketchybar
 *** Fewer title bars
 Application-specific on mac
 - https://github.com/koekeishiya/yabai/issues/241
@@ -60,6 +58,10 @@ unfortunately this adds everything even if not project
 
 ** MAYBE Basic hammerspoon dropdown script
 - just max with yabai
+
+** MAYBE Install kitty/wezterm through nix?
+Is nixgl needed?
+Is it a good idea?
 
 * Not Vital (and some possibly already fixed)
 ** MAYBE Redshift equivalent

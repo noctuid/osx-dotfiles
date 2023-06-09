@@ -2,11 +2,13 @@
 
 label=$(yabai -m query --spaces --space | jq --raw-output '.label')
 case $label in
-    one) open -a 'Microsoft Outlook';;
-    two) emacsclient -c;;
+	one) open -a 'Microsoft Outlook';;
+	two) emacsclient -c;;
 	three) open -a Firefox;;
 	four) open -a 'Google Chrome';;
+	five) open -a 'Visual Studio Code';;
 	six) open -a 'zoom.us';;
 	seven) open -a 'Microsoft Teams';;
-    *) emacsclient -c;;
+	nine) open -a 'Microsoft Excel';;
+	*) emacsclient -c;;
 esac

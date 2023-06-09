@@ -1,5 +1,29 @@
 #!/usr/bin/env bash
 
+# shellcheck disable=SC1090
+source ~/bin/helpers.sh
+
+trigger() {
+	if hash sketchybar 2> /dev/null; then
+		sketchybar -m --trigger "$1"
+	fi
+}
+
+yabai_ensure_space() {
+	local index label spaces space_with_index
+	index=$1
+	label=$2
+	spaces=$(yabai -m query --spaces)
+	space_with_index=$(echo "$spaces" \
+							| jq --raw-output ".[] | select(.label == \"$label\")")
+	# have to check or yabai will keep creating spaces
+	if [[ -z $space_with_index ]]; then
+		yabai -m space --create "$index" --label "$label"
+	elif [[ -z $(echo "$space_with_index" | jq --raw-output ".label") ]]; then
+		yabai -m space "$index" --label "$label"
+	fi
+}
+
 yabai_left() {
 	yabai -m window --focus west \
 		|| yabai -m window --focus stack.prev \
@@ -33,11 +57,36 @@ yabai_right() {
 }
 
 yabai_toggle_layout() {
+	local current
 	current=$(yabai -m query --spaces --space | jq --raw-output '.type')
 	if [[ $current == stack ]]; then
 		yabai -m space --layout bsp
 	else
 		yabai -m space --layout stack
+	fi
+	trigger yabai_layout_change
+}
+
+yabai_toggle_maximize_available_space() {
+	if [[ $(yabai -m config window_border) == on ]]; then
+		yabai -m space --layout stack
+		yabai -m config \
+			  top_padding    0 \
+			  bottom_padding 0 \
+			  left_padding   0 \
+			  right_padding  0 \
+			  external_bar all:0:0 \
+			  window_border off
+		sketchybar -m --bar hidden=on
+	else
+		yabai -m config \
+			  top_padding    "$WM_GAP" \
+			  bottom_padding "$WM_GAP" \
+			  left_padding   "$WM_GAP" \
+			  right_padding  "$WM_GAP" \
+			  external_bar all:"$BAR_HEIGHT":0 \
+			  window_border on
+		sketchybar -m --bar hidden=off
 	fi
 }
 
@@ -45,4 +94,9 @@ yabai_display_cycle() {
 	yabai -m display --select next || yabai -m display --select first
 }
 
-"yabai_$1" 2> /dev/null
+yabai_move_to() {
+	yabai -m window --space "$1"
+	trigger yabai_window_moved_space
+}
+
+"yabai_$1" "${@:2}"

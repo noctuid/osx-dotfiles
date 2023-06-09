@@ -14,11 +14,12 @@ yabai -m config layout stack
 # open new windows on right or bottom
 yabai -m config window_placement second_child
 
+# TODO does this actually work
 # floating windows always on top
 yabai -m config window_topmost on
 
 # * Mouse Behavior
-yabai -m config mouse_modfier cmd
+yabai -m config mouse_modifier cmd
 yabai -m config mouse_action1 move
 yabai -m config mouse_action2 resize
 # swap rather than stack when dragging one bsp window onto another
@@ -44,29 +45,39 @@ yabai -m config left_padding   "$WM_GAP"
 yabai -m config right_padding  "$WM_GAP"
 yabai -m config window_gap     "$WM_GAP"
 
-# yabai -m config all:"$TOP_PADDING":0 external_bar
+yabai -m config external_bar all:"$BAR_HEIGHT":0
 
 # ** Color
 wal_set_yabai_colors
 
 # * Rules
+# https://github.com/koekeishiya/yabai/issues/86
+# https://github.com/koekeishiya/yabai/issues/587
+# TODO test these
+# yabai -m rule --add app=Emacs manage=on title!='^$'
+# yabai -m rule --add app=emacs manage=on title!='^$'
+# yabai -m rule --add app=emacsclient manage=on title!='^$'
+# why is the title sometimes empty?
+yabai -m rule --add app=Emacs manage=on
+
 # https://github.com/koekeishiya/yabai/wiki/Commands#automation-with-rules-and-signals
 # don't bother managing some apps that can't be resized
 yabai -m rule --add app="^System Settings$" manage=off
+yabai -m rule --add app="^Digital Color Meter$" manage=off
 # doesn't seem to be able to manage Outlook correctly...
 # yabai -m rule --add app="^Outlook$" manage=off
 
 # * Create Spaces
-yabai -m space --create 1 --label one
-yabai -m space --create 2 --label two
-yabai -m space --create 3 --label three
-yabai -m space --create 4 --label four
-yabai -m space --create 5 --label five
-yabai -m space --create 6 --label six
-yabai -m space --create 7 --label seven
-yabai -m space --create 8 --label eight
-yabai -m space --create 9 --label nine
-yabai -m space --create 10 --label ten
+yabei ensure_space 1 one
+yabei ensure_space 2 two
+yabei ensure_space 3 three
+yabei ensure_space 4 four
+yabei ensure_space 5 five
+yabei ensure_space 6 six
+yabei ensure_space 7 seven
+yabei ensure_space 8 eight
+yabei ensure_space 9 nine
+yabei ensure_space 10 ten
 
 # * Wallpaper
 # TODO is this necessary?
@@ -75,3 +86,8 @@ if [[ -f ~/.cache/wallpaper ]]; then
 	setallspaceswallpaper ~/.cache/wallpaper
 fi
 
+# * Signals
+yabai -m signal --add event=window_created \
+	  action="sketchybar -m --trigger yabai_window_created &> /dev/null"
+yabai -m signal --add event=window_destroyed \
+	  action="sketchybar -m --trigger yabai_window_destroyed &> /dev/null"
