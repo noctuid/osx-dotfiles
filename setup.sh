@@ -99,9 +99,9 @@ options:
 }
 
 all() {
-	nix_pull "$basedir"/flake.lock
+	nix_pull "$basedir"/flake.lock || return 1
 	nix_channel_setup
-	nix_setup
+	nix_setup || return 1
 
 	# yarn_global_install
 
