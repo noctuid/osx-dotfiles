@@ -1,10 +1,6 @@
-;; * Initial Width/Height
-;; Set default window size
-(general-after-gui
-  (cl-pushnew '(width . 265) default-frame-alist
-              :key #'car)
-  (cl-pushnew '(height . 80) default-frame-alist
-              :key #'car))
+;; * Font Size
+;; needs to be different/~double on macOS (probably due to scaling)
+(gsetq textsize-default-points 20)
 
 ;; * Org
 ;; TODO temporary until have pushed full org config to main dotfiles

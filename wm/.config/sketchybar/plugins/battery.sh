@@ -27,5 +27,5 @@ else
 	color="$red"
 fi
 
-sketchybar -m --set "$NAME" icon="$icon" label="$percent" \
+sketchybar -m --set "$NAME" icon="$icon" label="$percent%" \
 		   icon.color="$color" label.color="$foreground"

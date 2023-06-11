@@ -5,7 +5,7 @@ install_nix() {
 	# https://nixos.org/download.html
 	# multi-user installation
 	sh <(curl -L https://nixos.org/nix/install) --daemon
-	# then
+	# then in new terminal
 	nix-shell -p nix-info --run "nix-info -m"
 }
 
@@ -16,6 +16,8 @@ install_brew() {
 
 # TODO check if this is still needed (no longer installing most packages through
 # brew for one)
+# UPDATE it looks like brew install does chmod go-w at least for share/zsh and
+# site-functions already
 # many packages write here and will fail to install by default
 # sudo chown -R "$(whoami)" /usr/local/share/man /usr/local/share/man/man1 \
 #      /usr/local/share/zsh /usr/local/share/zsh/site-functions

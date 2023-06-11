@@ -7,6 +7,7 @@ setpref browser.autofocus false
 " allow tridactyl on more domains
 setpref extensions.webextensions.restrictedDomains ""
 
+setpref browser.sessionstore.enabled true
 " restore session on startup (not default)
 setpref browser.startup.page 3
 

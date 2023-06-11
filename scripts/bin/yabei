@@ -9,13 +9,22 @@ trigger() {
 	fi
 }
 
+yabai_toggle() {
+	yabai_plist=~/Library/LaunchAgents/org.nixos.yabai.plist
+	if pgrep yabai > /dev/null; then
+		launchctl unload "$yabai_plist"
+	else
+		launchctl load -w "$yabai_plist"
+	fi
+}
+
 yabai_ensure_space() {
 	local index label spaces space_with_index
 	index=$1
 	label=$2
 	spaces=$(yabai -m query --spaces)
 	space_with_index=$(echo "$spaces" \
-							| jq --raw-output ".[] | select(.label == \"$label\")")
+							| jq --raw-output ".[] | select(.index == $index)")
 	# have to check or yabai will keep creating spaces
 	if [[ -z $space_with_index ]]; then
 		yabai -m space --create "$index" --label "$label"
@@ -79,13 +88,15 @@ yabai_toggle_maximize_available_space() {
 			  window_border off
 		sketchybar -m --bar hidden=on
 	else
+		# no window border for now
+		# https://github.com/koekeishiya/yabai/issues/1732
 		yabai -m config \
 			  top_padding    "$WM_GAP" \
 			  bottom_padding "$WM_GAP" \
 			  left_padding   "$WM_GAP" \
 			  right_padding  "$WM_GAP" \
 			  external_bar all:"$BAR_HEIGHT":0 \
-			  window_border on
+			  window_border off
 		sketchybar -m --bar hidden=off
 	fi
 }

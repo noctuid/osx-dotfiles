@@ -23,6 +23,10 @@ Does yabai still start correctly?
 
 ** TODO [#B] try luna
 
+* Major
+** TODO figure out which packages are unsupported
+Something installing gdb
+
 * Very Nice
 ** TODO Basic Appearance
 *** Fewer title bars
@@ -76,7 +80,6 @@ Just pull click script as-is?
 ** TODO Playerctl daemon setup
 
 ** TODO Fix macfuse
-** TODO OSX -> macOS
 ** TODO Change Emacs icon
 ** VERIFY company shell freezing bash
 ** TODO Fix vale recipe reference

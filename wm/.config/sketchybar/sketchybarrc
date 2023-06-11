@@ -108,10 +108,11 @@ sketchybar -m \
 		   yabai_window_destroyed \
 		   yabai_window_moved_space
 
-# * Middle
+# not centered since apple thought it would be a good idea to put the webcam
+# over the screen
 # alternative until add zscroll
 sketchybar -m \
-		   --add item title center \
+		   --add item title left \
 		   --set title script="$PLUGIN_DIR/title.sh" label.color="$yellow" \
 		   --subscribe title front_app_switched
 

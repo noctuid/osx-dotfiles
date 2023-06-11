@@ -34,9 +34,7 @@ echo "Setting Emacs colors"
 emacsclient -a false -e t &> /dev/null \
 	&& emacsclient --eval '(noct-ewal)' &> /dev/null &
 emacsclient -socket-name=dirvish -a false -e t &> /dev/null \
-	&& emacsclient -socket-name=dirvish --eval '(noct-ewal)' &> /dev/null &
-emacsclient -socket-name=shell-menu -a false -e t &> /dev/null \
-	&& emacsclient -socket-name=shell-menu --eval '(noct-ewal)' &> /dev/null &
+	&& emacsclient --socket-name=dirvish --eval '(noct-ewal)' &> /dev/null &
 
 echo "Setting pywalfox colors"
 if hash pywalfox 2> /dev/null; then

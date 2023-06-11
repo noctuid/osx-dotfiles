@@ -15,13 +15,15 @@
 # TODO neovim config
 # TODO consistent error _message on failure
 
-# * Helpers
+# * Helpers/Setup
 basedir=$(dirname "$(realpath "$0")")
 rdotfiles=https://raw.githubusercontent.com/noctuid/dotfiles/master
 svn_dotfiles=https://github.com/noctuid/dotfiles/trunk
 
 # shellcheck disable=SC1090
 source "$basedir"/setup-utils/setup-utils.sh
+
+mkdir -p ~/.cache
 
 # * Stow
 stow_dotfiles() {
@@ -70,6 +72,7 @@ pywal_setup() {
 	fi
 }
 
+# NOTE this won't work first run until yabai has created spaces
 # https://github.com/dylanaraps/pywal/issues/668
 pywal_gruvbox() {
 	walset --theme base16-gruvbox-soft "$basedir"/mac-wallpapers/gruv.jpg
@@ -78,6 +81,41 @@ pywal_gruvbox() {
 pywal_rose_pine() {
 	walset --theme rose-pine-hybrid "$basedir"/mac-wallpapers/pixelmoon.png
 }
+
+# * Hackarounds
+hack_start_emacs_daemons() {
+	open -a Emacs --args --daemon
+	open -a Emacs --args --daemon=dirvish
+}
+
+hack_start_nix() {
+	sudo launchctl kickstart -k system/org.nixos.darwin-store
+	sudo launchctl kickstart -k system/org.nixos.nix-daemon
+	sudo launchctl kickstart -k system/org.nixos.yabai-sa
+}
+
+hack_reload_failed_services() {
+	local agentdir plists
+	agentdir=~/Library/LaunchAgents
+	plists=(
+		"$agentdir/org.nixos.yabai.plist"
+		"$agentdir/org.nix-community.home.skhd.plist"
+		"$agentdir/org.nix-community.home.sketchybar.plist"
+	)
+	for plist in "${plists[@]}"; do
+		launchctl unload "$plist"
+		launchctl load -w "$plist"
+	done
+}
+
+nixup() (
+	# nix-darwin... rebuild switch will take care of everything if needed
+	# sudo launchctl kickstart -k system/org.nixos.activate-system
+
+	hack_start_nix
+	hack_reload_failed_services
+	hack_start_emacs_daemons
+)
 
 # * Main
 setup_help() {
@@ -114,9 +152,12 @@ all() {
 	# vscode_setup
 
 	gitconfig_setup
-	github_auth_setup
+	github_auth_setup "$basedir"
 
 	stow_dotfiles
+	# necessary e.g. for pywal_setup which installs to ~/.local/bin
+	# shellcheck disable=SC1090
+	source ~/.profile
 
 	no_reopen_setup
 

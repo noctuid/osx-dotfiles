@@ -106,9 +106,9 @@ cmd + ctrl - l : lockscreen
 cmd + ctrl - m : open -na /Applications/mpv.app $(pbpaste)
 
 # * Yabai
-cmd + ctrl - escape : yabai --restart-service
+cmd - escape : yabei toggle
 # .
-cmd + ctrl - 0x2F : yabai --restart-service
+cmd - 0x2F : yabai --restart-service
 
 # ** Window Keybindings
 cmd - w : yabai -m window --close
@@ -130,14 +130,15 @@ cmd + shift - 0x29 : yabai -m window --swap north
 # cmd + shift - y : yabai -m window --warp east
 # cmd + shift - 0x29 : yabai -m window --warp north
 
-cmd - v : yabai -m window --toggle float
-cmd - c : yabai -m window --toggle sticky
+# don't override copy/paste
+cmd + shift - v : yabai -m window --toggle float
+cmd + shift - c : yabai -m window --toggle sticky
 cmd - m : yabei toggle_layout
 cmd - b : yabai -m space --balance
 
 # not really fullscreen, just toggling padding/gaps/bar
 cmd - f : yabei toggle_maximize_available_space
-cmd - F : yabai -m window --toggle native-fullscreen
+cmd + shift - f : yabai -m window --toggle native-fullscreen
 cmd - z : yabai -m window --toggle zoom-parent
 
 # ** Space Keybindings

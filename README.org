@@ -1,9 +1,12 @@
-* OSX Setup Instructions
+* MacOS Setup Instructions
 ** Manual Pre-Setup
-- Install brew (see =./pre-setup.sh=)
+- Install homebrew (see =./pre-setup.sh=)
   - The first thing brew does is to install the Xcode command-line utilities (these are needed for other things as well); if you do not get a popup, manually run ~xcode-select --install~
-- Install nix (=./pre-setup.sh=)
+  - Run ~eval "$(/opt/hombrew/bin/brew shellenv)"~ in the shell you will run =./pre-setup.sh= in
+  - You do not need to run the command suggests to add Homebrew to your path (it's already in .profile)
+- Install nix (see =./pre-setup.sh=)
 - Optionally follow yabai setup instructions if you want to be able to manipulate spaces
+- Clone this repo if necessary (~git clone --recurse-submodules <url>~)
 
 Optional (haven't decided on best way to install poetry, currently installing through nix):
 - Install poetry (recommended method is not packaged)
@@ -21,5 +24,8 @@ If you are using tmux (currently not):
 - Run <prefix> I to install tmux plugins (after installing/running tmux)
 
 Also install firefox/addons including tridactyl.
+- Open a new tab so tridactyl is activated
 - Run ~:installnative~ and follow instructions
 - ~:source ~~/.config/tridactyl/tridactylrc~ and restart firefox (necessary for setprefs to take affect and start saving browser session)
+
+- Set up webcam/audio

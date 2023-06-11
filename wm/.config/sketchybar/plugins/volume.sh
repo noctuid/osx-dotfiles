@@ -5,6 +5,8 @@
 basedir=$(dirname "$(realpath "$0")")
 # shellcheck disable=SC1090
 source "$basedir"/../colors.sh
+# shellcheck disable=SC1090
+source ~/bin/helpers.sh
 
 volume=$INFO
 label_drawing=on
@@ -20,9 +22,9 @@ elif system_profiler SPAudioDataType | grep --quiet Headphones; then
 elif (( volume >= 66 )); then
 	icon=""
 elif (( volume >= 33 )); then
-	icon=""
-elif (( volume >= 1 )); then
 	icon=""
+elif (( volume >= 1 )); then
+	icon=""
 fi
 
 sketchybar --set "$NAME" \
