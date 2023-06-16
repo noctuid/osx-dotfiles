@@ -15,6 +15,8 @@ Optional (haven't decided on best way to install poetry, currently installing th
 Run ~./pre-setup.sh~ then ~./setup.sh~.  Enter password as necessary.  Reboot afterwards.  After the initial setup, ~dots~ can be used to run =setup.sh= from anywhere.  See ~dots --help~ for more information.
 
 ** Manual Post-Setup
+- Swap command and control for external keyboard in system settings
+
 - Run ~p10k configure~ to fully set up shell prompt; I've decided to continue to do this rather than store the generated file in my dotfiles; it is very quick, and I might want slightly different behavior for different computers
 
 If you are using karabiner for keyboard layout:

@@ -106,71 +106,70 @@ cmd + ctrl - l : lockscreen
 cmd + ctrl - m : open -na /Applications/mpv.app $(pbpaste)
 
 # * Yabai
-cmd - escape : yabei toggle
+ctrl - escape : yabei toggle
 # .
-cmd - 0x2F : yabai --restart-service
+ctrl - 0x2F : yabai --restart-service
 
 # ** Window Keybindings
-cmd - w : yabai -m window --close
+ctrl - w : yabai -m window --close
 
-cmd - k : yabei down
-cmd - u : yabei left
-cmd - y : yabei right
+ctrl - k : yabei down
+ctrl - u : yabei left
+ctrl - y : yabei right
 # ;
-cmd - 0x29 : yabei up
+ctrl - 0x29 : yabei up
 
-cmd + shift - k : yabai -m window --swap south
-cmd + shift - u : yabai -m window --swap west
-cmd + shift - y : yabai -m window --swap east
-cmd + shift - 0x29 : yabai -m window --swap north
+ctrl + shift - k : yabai -m window --swap south
+ctrl + shift - u : yabai -m window --swap west
+ctrl + shift - y : yabai -m window --swap east
+ctrl + shift - 0x29 : yabai -m window --swap north
 
 # maintain current size instead of taking other window's size
-# cmd + shift - l : yabai -m window --warp south
-# cmd + shift - u : yabai -m window --warp west
-# cmd + shift - y : yabai -m window --warp east
-# cmd + shift - 0x29 : yabai -m window --warp north
+# ctrl + shift - l : yabai -m window --warp south
+# ctrl + shift - u : yabai -m window --warp west
+# ctrl + shift - y : yabai -m window --warp east
+# ctrl + shift - 0x29 : yabai -m window --warp north
 
-# don't override copy/paste
-cmd + shift - v : yabai -m window --toggle float
-cmd + shift - c : yabai -m window --toggle sticky
-cmd - m : yabei toggle_layout
-cmd - b : yabai -m space --balance
+ctrl + shift - v : yabai -m window --toggle float
+ctrl + shift - c : yabai -m window --toggle sticky
+ctrl - m : yabei toggle_layout
+ctrl - b : yabai -m space --balance
 
 # not really fullscreen, just toggling padding/gaps/bar
-cmd - f : yabei toggle_maximize_available_space
-cmd + shift - f : yabai -m window --toggle native-fullscreen
-cmd - z : yabai -m window --toggle zoom-parent
+ctrl - f : yabei toggle_maximize_available_space
+ctrl + shift - f : yabai -m window --toggle native-fullscreen
+ctrl - z : yabai -m window --toggle zoom-parent
 
 # ** Space Keybindings
 # use labels so don't have to rely on order (which mac can change... fullscreen
 # windows will change, manually created spaces, etc.)
-cmd - a : yabai -m space --focus one
-cmd - r : yabai -m space --focus two
-cmd - s : yabai -m space --focus three
-cmd - t : yabai -m space --focus four
-cmd - d : yabai -m space --focus five
-cmd - h : yabai -m space --focus six
-cmd - n : yabai -m space --focus seven
-cmd - e : yabai -m space --focus eight
-cmd - i : yabai -m space --focus nine
-cmd - o : yabai -m space --focus ten
+ctrl - a : yabai -m space --focus one
+ctrl - r : yabai -m space --focus two
+ctrl - s : yabai -m space --focus three
+ctrl - t : yabai -m space --focus four
+ctrl - d : yabai -m space --focus five
+ctrl - h : yabai -m space --focus six
+ctrl - n : yabai -m space --focus seven
+ctrl - e : yabai -m space --focus eight
+ctrl - i : yabai -m space --focus nine
+ctrl - o : yabai -m space --focus ten
 
-cmd - l : yabai -m space --focus recent
+ctrl - l : yabai -m space --focus recent
 
-cmd + shift - a : yabei move_to one
-cmd + shift - r : yabei move_to two
-cmd + shift - s : yabei move_to three
-cmd + shift - t : yabei move_to four
-cmd + shift - d : yabei move_to five
-cmd + shift - h : yabei move_to six
-cmd + shift - n : yabei move_to seven
-cmd + shift - e : yabei move_to eight
-cmd + shift - i : yabei move_to nine
-cmd + shift - o : yabei move_to ten
+ctrl + shift - a : yabei move_to one
+ctrl + shift - r : yabei move_to two
+ctrl + shift - s : yabei move_to three
+ctrl + shift - t : yabei move_to four
+ctrl + shift - d : yabei move_to five
+ctrl + shift - h : yabei move_to six
+ctrl + shift - n : yabei move_to seven
+ctrl + shift - e : yabei move_to eight
+ctrl + shift - i : yabei move_to nine
+ctrl + shift - o : yabei move_to ten
 
 # ** Display Keybindings
 # ,
-cmd - 0x2B : yabei display_cycle
+ctrl - 0x2B : yabei display_cycle
 
 # ** TODO Gap Adjustment
 # https://github.com/koekeishiya/yabai/wiki/Commands#modify-padding-and-gaps

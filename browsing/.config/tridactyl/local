@@ -15,14 +15,13 @@ setpref browser.startup.page 3
 " setpref browser.download.useDownloadDir true
 
 " * Keybindings
-" needed on mac; can use mode browser to make them global (works even on pages
-" where tridactyl doesn't)
-bind --mode=browser <c-w> tabclose
-bind --mode=browser <c-t> tabopen
+bind --mode=ex <m-y> composite getclip | text.insert_text
+bind --mode=input <m-y> composite getclip | text.insert_text
+bind --mode=insert <m-y> composite getclip | text.insert_text
 
-bind --mode=ex <c-BS> text.backward_kill_word
-bind --mode=input <c-BS> text.backward_kill_word
-bind --mode=insert <c-BS> text.backward_kill_word
+bind --mode=ex <m-BS> text.backward_kill_word
+bind --mode=input <m-BS> text.backward_kill_word
+bind --mode=insert <m-BS> text.backward_kill_word
 
 " not sure why needed on mac, but it is
 bind --mode=ex <Home> text.beginning_of_line
