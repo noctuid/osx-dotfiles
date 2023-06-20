@@ -51,5 +51,7 @@
   },
   "[jsonc]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
-  }
+  },
+  "editor.fontFamily": "Delugia, Menlo, Monaco, 'Courier New', monospace",
+  "editor.fontSize": 14
 }
