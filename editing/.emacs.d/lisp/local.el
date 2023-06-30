@@ -1,6 +1,7 @@
 ;; * Font Size
 ;; needs to be different/~double on macOS (probably due to scaling)
-(gsetq textsize-default-points 20)
+(general-with 'textsize
+  (gsetq textsize-default-points 20))
 
 ;; * Org
 ;; TODO temporary until have pushed full org config to main dotfiles
