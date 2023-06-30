@@ -25,8 +25,8 @@ cmd + ctrl - o : playerctl play-pause
 
 # ** Screenshots
 # ~/bin/screenshot
-# Print; TODO find the right key for printscreen
-# 0x69 : screenshot
+# Print
+0x69 : screenshot
 
 cmd + ctrl - q : screenshot select
 
