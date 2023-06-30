@@ -102,7 +102,7 @@ yabai_toggle_maximize_available_space() {
 }
 
 yabai_display_cycle() {
-	yabai -m display --select next || yabai -m display --select first
+	yabai -m display --focus next || yabai -m display --focus first
 }
 
 yabai_move_to() {
