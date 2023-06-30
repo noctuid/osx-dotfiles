@@ -14,9 +14,11 @@ yabai -m config layout stack
 # open new windows on right or bottom
 yabai -m config window_placement second_child
 
-# TODO does this actually work
 # floating windows always on top
-yabai -m config window_topmost on
+# NOTE: changes do not take effect for an app until completely close that app
+# NOTE: actually causes many popups to be below their app; just never touch it
+# https://github.com/koekeishiya/yabai/issues/1657
+# yabai -m config window_topmost on
 
 # * Mouse Behavior
 yabai -m config mouse_modifier cmd
@@ -53,11 +55,29 @@ yabai -m config external_bar all:"$BAR_HEIGHT":0
 wal_set_yabai_colors
 
 # * Rules
+# clear all rules (can't just iterate to max index because indices change)
+while true; do
+    rule_count=$(yabai -m rule --list | jq --raw-output ". | length")
+	if (( rule_count > 0 )); then
+		yabai -m rule --remove 0
+	else
+		break
+	fi
+done
+
 # https://github.com/koekeishiya/yabai/issues/86
 # https://github.com/koekeishiya/yabai/issues/587
-# NOTE: only works with emacsclient if daemon was started through Emacs.app
-# (e.g. open -a Emacs --args --daemon)
-yabai -m rule --add app=Emacs manage=on
+# https://github.com/koekeishiya/yabai/issues/460
+# https://github.com/d12frosted/homebrew-emacs-plus/issues/192
+# Summary of how to get Emacs working correctly
+# - Use the fix-window-role patch from emacs-plus (Emacs.app will now be tiled
+#   correctly by default)
+# - Run "open -a Emacs --args --daemon" before using emacsclient
+# - DO NOT also use a manual manage rule for emacs or e.g. child frame
+#   completion popups will be tiled
+# - DO NOT use "yabai -m config window_topmost on" or e.g. child frame
+#   completion popups will show up behind Emacs
+# yabai -m rule --add app=Emacs title!="^$" manage=on
 
 # https://github.com/koekeishiya/yabai/wiki/Commands#automation-with-rules-and-signals
 # don't bother managing some apps that can't be resized
@@ -65,10 +85,29 @@ yabai -m rule --add app="^System Settings$" manage=off
 yabai -m rule --add app="^Digital Color Meter$" manage=off
 yabai -m rule --add app="^Cisco AnyConnect" manage=off
 
-yabai -m rule --add title="^Microsoft Teams Notification$" manage=off
+# ** Outlook Reminders
+# don't focus outlook reminders when switching to the desktop (unless click on
+# them)
+yabai -m signal --add \
+    event=window_focused \
+    app='^Microsoft Outlook$' \
+    title='Reminder$' \
+    action='yabai -m window --focus mouse &> /dev/null'
 
-# some popup windows/notification windows don't have titles
-yabai -m rule --add title="^$" manage=off
+# ** Microsoft Teams Notifications
+# generally working solution is to just change Teams to use native
+# notifications, but apparently it may not use them in all cases
+# https://github.com/koekeishiya/yabai/issues/74
+yabai -m rule --add \
+	  app="^Microsoft Teams$" \
+	  title="^Microsoft Teams Notification$" \
+	  manage=off border=off
+
+yabai -m signal --add \
+    event=window_focused \
+    app='^Microsoft Outlook$' \
+    title='^Microsoft Teams Notification$' \
+    action='yabai -m window --focus mouse &> /dev/null'
 
 # * Create Spaces
 yabei ensure_space 1 one

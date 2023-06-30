@@ -31,3 +31,9 @@ Also install firefox/addons including tridactyl.
 - ~:source ~~/.config/tridactyl/tridactylrc~ and restart firefox (necessary for setprefs to take affect and start saving browser session)
 
 - Set up webcam/audio
+
+- Configure docker to run at startup
+
+Notifications:
+- Change Microsoft Teams notification setting to use Mac notifications and enable/allow notifications in System Settings for Teams
+- Also allow zoom notifications and notifications for any other apps you want notifications from

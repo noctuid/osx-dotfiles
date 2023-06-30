@@ -83,6 +83,7 @@ pywal_rose_pine() {
 }
 
 # * Hackarounds
+# must start daemon through Emacs.app for windows to be managed/tiled by yabai
 hack_start_emacs_daemons() {
 	open -a Emacs --args --daemon
 	open -a Emacs --args --daemon=dirvish
@@ -114,8 +115,21 @@ nixup() (
 
 	hack_start_nix
 	hack_reload_failed_services
-	hack_start_emacs_daemons
+	# FIXME
+	export NIXPKGS_ALLOW_UNSUPPORTED_SYSTEM=1
+	# necessary for Emacs.app to be available
+	nix_darwin_switch
+	_message "Open a new terminal and run: dots emacsup"
+	_message "Don' run emacsclient immediately afterwards.  If have problems
+with packages not being available, you may need to kill Emacs in activity
+monitor and start it again."
 )
+
+# TODO unfortunately needs to be split/run in new terminal for nix programs to
+# be available
+emacsup() {
+	hack_start_emacs_daemons
+}
 
 # * Main
 setup_help() {
