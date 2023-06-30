@@ -4,11 +4,14 @@ declare -a spaces=(one two three four five six seven eight nine ten)
 
 echo "Setting wallpaper for all spaces to $wallpaper"
 
-original_space=$(yabai -m query --spaces --space | jq --raw-output ".id")
+original_space=$(yabai -m query --spaces --space | jq --raw-output ".index")
+
 for space in "${spaces[@]}"; do
     yabai -m space --focus "$space"
     wallpaper set "$wallpaper"
 done
 yabai -m space --focus "$original_space"
 
-ln -sf "$wallpaper" ~/.cache/wallpaper
+if [[ ! $wallpaper -ef ~/.cache/wallpaper ]]; then
+	ln -sf "$wallpaper" ~/.cache/wallpaper
+fi

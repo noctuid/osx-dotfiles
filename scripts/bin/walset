@@ -18,10 +18,10 @@ if [[ $1 == --theme ]]; then
 fi
 
 if [[ -n $theme ]]; then
-	"Applying colors for theme $theme"
+	echo "Applying colors for theme $theme"
 	wal --theme "$theme"
 else
-	"Applying colors for wallpaper $wallpaper"
+	echo "Applying colors for wallpaper $wallpaper"
 	wal -n -i "$wallpaper"
 fi
 
