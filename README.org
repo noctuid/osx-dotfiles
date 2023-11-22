@@ -4,7 +4,7 @@
   - The first thing brew does is to install the Xcode command-line utilities (these are needed for other things as well); if you do not get a popup, manually run ~xcode-select --install~
   - Run ~eval "$(/opt/hombrew/bin/brew shellenv)"~ in the shell you will run =./pre-setup.sh= in
   - You do not need to run the command suggests to add Homebrew to your path (it's already in .profile)
-- Install nix (see =./pre-setup.sh=)
+- Install nix if will use (see =./pre-setup.sh=)
 - Optionally follow yabai setup instructions if you want to be able to manipulate spaces
 - Clone this repo if necessary (~git clone --recurse-submodules <url>~)
 

@@ -50,6 +50,8 @@ del os")
       "V" (noct-find-file "/Volumes/"))))
 
 ;; * Other
+(setq browse-url-generic-program "firefox")
+
 (let ((local-unclean-file (expand-file-name "lisp/local-unclean.el"
                                             user-emacs-directory)))
   (when (file-exists-p local-unclean-file)

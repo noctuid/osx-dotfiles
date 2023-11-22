@@ -101,7 +101,13 @@ yabai_toggle_maximize_available_space() {
 	fi
 }
 
+# TODO actually select space focused on other display
 yabai_display_cycle() {
+	# display=$(yabai -m query --displays --display next)
+	# first_display=$(yabai -m query--displays --display first)
+	# display=${display:-$first_display}
+	# # TODO can find random but not focused...
+	# space_on_other_display
 	yabai -m display --focus next || yabai -m display --focus first
 }
 

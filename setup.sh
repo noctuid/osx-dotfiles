@@ -2,7 +2,7 @@
 # dependencies:
 # - git (should be installed by default)
 # - svn
-# - nix
+# - nix (if using)
 # - brew
 # - xcode and developer tools (i.e. xcode-select --install)
 # - gnu coreutils (brew install coreutils)
@@ -20,6 +20,8 @@ basedir=$(dirname "$(realpath "$0")")
 rdotfiles=https://raw.githubusercontent.com/noctuid/dotfiles/master
 svn_dotfiles=https://github.com/noctuid/dotfiles/trunk
 
+USE_NIX=false
+
 # shellcheck disable=SC1090
 source "$basedir"/setup-utils/setup-utils.sh
 
@@ -31,6 +33,19 @@ stow_dotfiles() {
 	source "$basedir"/scripts/aliases/stow.sh
 	_message "Symlinking config files."
 	restow || _errm "Symlinking config files failed."
+}
+
+# * Brew Setup
+brew_install_packages() {
+	brew bundle --file="$basedir"/Brewfile
+}
+
+# NOTE: this only needs to be run once but is idempotent
+services_setup() {
+	_message "Enabling services."
+	yabai --start-service
+	skhd --start-service
+	brew services start sketchybar
 }
 
 # * VS Code Setup
@@ -89,13 +104,19 @@ hack_start_emacs_daemons() {
 	open -a Emacs --args --daemon=dirvish
 }
 
-hack_start_nix() {
+# TODO unfortunately needs to be split/run in new terminal for nix programs to
+# be available
+emacsup() {
+	hack_start_emacs_daemons
+}
+
+__hack_start_nix() {
 	sudo launchctl kickstart -k system/org.nixos.darwin-store
 	sudo launchctl kickstart -k system/org.nixos.nix-daemon
 	sudo launchctl kickstart -k system/org.nixos.yabai-sa
 }
 
-hack_reload_failed_services() {
+__hack_reload_failed_services() {
 	local agentdir plists
 	agentdir=~/Library/LaunchAgents
 	plists=(
@@ -113,22 +134,22 @@ nixup() (
 	# nix-darwin... rebuild switch will take care of everything if needed
 	# sudo launchctl kickstart -k system/org.nixos.activate-system
 
-	hack_start_nix
-	hack_reload_failed_services
+	__hack_start_nix
+	__hack_reload_failed_services
 	# FIXME
 	export NIXPKGS_ALLOW_UNSUPPORTED_SYSTEM=1
 	# necessary for Emacs.app to be available
 	nix_darwin_switch
 	_message "Open a new terminal and run: dots emacsup"
-	_message "Don' run emacsclient immediately afterwards.  If have problems
-with packages not being available, you may need to kill Emacs in activity
-monitor and start it again."
+	_message "Don't run emacsclient immediately afterwards.  If you have
+problems with packages not being available, you may need to kill Emacs in
+activity monitor and start it again."
 )
 
-# TODO unfortunately needs to be split/run in new terminal for nix programs to
-# be available
-emacsup() {
-	hack_start_emacs_daemons
+# * Post Reboot
+post_reboot() {
+	emacsup
+	~/.config/yabai/yabairc
 }
 
 # * Main
@@ -141,6 +162,7 @@ setup functions. To run a specific setup function, you can specify it, e.g.
 
 Here are a list of available commands:
 $(declare -F | awk '!/^declare -f _/{print "- " $NF}')
+- brew (alias for brew_install_packages)
 - nix (alias for nix_setup)
 - emacs (alias for emacs_pull)
 - pull (alias for all_config_pull)
@@ -151,9 +173,14 @@ options:
 }
 
 all() {
-	nix_pull "$basedir"/flake.lock || return 1
-	nix_channel_setup
-	nix_setup || return 1
+	if $USE_NIX; then
+		nix_pull "$basedir"/flake.lock || return 1
+		nix_channel_setup
+		nix_setup || return 1
+	else
+		brew_install_packages
+		services_setup
+	fi
 
 	# yarn_global_install
 
@@ -184,12 +211,23 @@ _main() {
 	elif [[ -z $1 ]]; then
 		all
 	elif [[ $1 == nix ]]; then
-		nix_setup
+		if $USE_NIX; then
+			nix_setup
+		else
+			_errm "Nix is disabled"
+			exit 1
+		fi
+	elif [[ $1 == brew ]]; then
+		brew_install_packages
 	elif [[ $1 == emacs ]]; then
 		emacs_pull
 	elif [[ $1 == pull ]]; then
 		all_config_pull
 	else
+		if [[ $1 =~ nix ]] && ! $USE_NIX; then
+			_errm "Nix is disabled"
+			exit 1
+		fi
 		"$@"
 	fi
 }
