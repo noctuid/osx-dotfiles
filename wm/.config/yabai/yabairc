@@ -95,17 +95,16 @@ yabai -m signal --add \
     action='yabai -m window --focus mouse &> /dev/null'
 
 # ** Microsoft Teams Notifications
-# generally working solution is to just change Teams to use native
-# notifications, but apparently it may not use them in all cases
 # https://github.com/koekeishiya/yabai/issues/74
 yabai -m rule --add \
-	  app="^Microsoft Teams$" \
+	  app="^Microsoft Teams classic$" \
 	  title="^Microsoft Teams Notification$" \
-	  manage=off border=off
+	  manage=off
 
+# using native teams notifications does not fix the problem
 yabai -m signal --add \
     event=window_focused \
-    app='^Microsoft Outlook$' \
+    app='^Microsoft Teams classic$' \
     title='^Microsoft Teams Notification$' \
     action='yabai -m window --focus mouse &> /dev/null'
 
