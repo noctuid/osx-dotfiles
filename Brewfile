@@ -1,9 +1,10 @@
 # * Taps
+# no longer necessary
+# tap "homebrew/core"
+# tap "homebrew/cask"
 tap "d12frosted/emacs-plus"
 tap "homebrew/bundle"
-tap "homebrew/cask"
 tap "homebrew/cask-fonts"
-tap "homebrew/core"
 tap "homebrew/services"
 # tap "clojure-lsp/brew"
 # TODO this recipe is broken
@@ -22,8 +23,8 @@ brew "atool"
 brew "unzip"
 brew "zip"
 brew "p7zip"
-# look inside archives
-brew "avfs"
+# look inside archives; not currently available on Apple Silicon
+# brew "avfs"
 brew "bat"
 brew "cloc"
 brew "make"
@@ -33,10 +34,11 @@ brew "cmake"
 brew "coreutils"
 brew "gawk"
 
-# TODO confirm this includes docker-compose
 cask "docker"
+brew "docker-compose"
 brew "exa"
-brew "ext4fuse"
+# not currently available on Apple Silicon
+# brew "ext4fuse"
 brew "imagemagick"
 brew "ispell"
 brew "p7zip"
@@ -138,8 +140,6 @@ brew "reattach-to-user-namespace"
 
 # * Search Programs
 # kind of a search program
-# TODO fasd is dead?
-# brew "fasd"
 brew "fd"
 brew "fzf"
 brew "ripgrep"
@@ -222,6 +222,13 @@ brew "ipython"
 # language server
 brew "pyright"
 brew "pipx"
+
+# ** Rust
+# use cargo to build some tools use
+brew "rust"
+
+# ** Taoml
+brew "taplo"
 
 # ** Lisp
 # brew "roswell"
