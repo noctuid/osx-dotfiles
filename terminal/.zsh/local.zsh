@@ -17,3 +17,7 @@ restartkarabiner() {
 dots() {
     ~/dotfiles/setup.sh "$@"
 }
+
+integresql() {
+    PGUSER=postgres PGPASSWORD=postgres $HOME/go/bin/server
+}
