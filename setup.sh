@@ -20,7 +20,7 @@ basedir=$(dirname "$(realpath "$0")")
 rdotfiles=https://raw.githubusercontent.com/noctuid/dotfiles/master
 svn_dotfiles=https://github.com/noctuid/dotfiles/trunk
 
-USE_NIX=false
+export USE_NIX=${USE_NIX:-false}
 
 # shellcheck disable=SC1090
 source "$basedir"/setup-utils/setup-utils.sh
@@ -130,7 +130,7 @@ __hack_reload_failed_services() {
 	done
 }
 
-nixup() (
+__nixup() (
 	# nix-darwin... rebuild switch will take care of everything if needed
 	# sudo launchctl kickstart -k system/org.nixos.activate-system
 
@@ -184,11 +184,7 @@ all() {
 
 	# yarn_global_install
 
-	emacs_pull
-	shell_pull
-	browser_pull
-	pywal_pull
-	python_pull
+	all_config_pull
 
 	# vscode_setup
 
