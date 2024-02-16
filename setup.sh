@@ -193,7 +193,9 @@ all() {
 	# vscode_setup
 
 	gitconfig_setup
-	github_auth_setup "$basedir"
+	gh auth login
+	# update .gitconfig
+	gh auth setup-git
 
 	stow_dotfiles
 	# necessary e.g. for pywal_setup which installs to ~/.local/bin
