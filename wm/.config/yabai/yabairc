@@ -83,7 +83,7 @@ done
 # don't bother managing some apps that can't be resized
 yabai -m rule --add app="^System Settings$" manage=off
 yabai -m rule --add app="^Digital Color Meter$" manage=off
-yabai -m rule --add app="^Cisco AnyConnect" manage=off
+yabai -m rule --add app="^Cisco Secure Client" manage=off
 
 # ** Outlook Reminders
 # don't focus outlook reminders when switching to the desktop (unless click on
@@ -95,18 +95,19 @@ yabai -m signal --add \
     action='yabai -m window --focus mouse &> /dev/null'
 
 # ** Microsoft Teams Notifications
+# no longer need manage off rule or window focus change when using native
+# notifications with the new (not classic) Teams
 # https://github.com/koekeishiya/yabai/issues/74
-yabai -m rule --add \
-	  app="^Microsoft Teams classic$" \
-	  title="^Microsoft Teams Notification$" \
-	  manage=off
+# yabai -m rule --add \
+# 	  app="^Microsoft Teams classic$" \
+# 	  title="^Microsoft Teams Notification$" \
+# 	  manage=off
 
-# using native teams notifications does not fix the problem
-yabai -m signal --add \
-    event=window_focused \
-    app='^Microsoft Teams classic$' \
-    title='^Microsoft Teams Notification$' \
-    action='yabai -m window --focus mouse &> /dev/null'
+# yabai -m signal --add \
+#     event=window_focused \
+#     app='^Microsoft Teams classic$' \
+#     title='^Microsoft Teams Notification$' \
+#     action='yabai -m window --focus mouse &> /dev/null'
 
 # * Create Spaces
 yabei ensure_space 1 one
