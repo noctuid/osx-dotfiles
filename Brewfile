@@ -211,7 +211,9 @@ brew "shellcheck"
 # ** Javascript/Typescript
 # brew "node"
 brew "yarn"
-brew "nvm"
+# brew "nvm"
+# infinitely faster
+brew "fnm"
 
 # ** Python
 brew "pyenv"

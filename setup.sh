@@ -181,6 +181,7 @@ all() {
 		brew_install_packages
 		services_setup
 	fi
+	cargo_install
 
 	# yarn_global_install
 
