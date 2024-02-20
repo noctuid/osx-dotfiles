@@ -1,9 +1,10 @@
 #!/usr/bin/env bash
 # dependencies:
 # - git (should be installed by default)
-# - svn
+# - curl (also installed by default)
 # - nix (if using)
 # - brew
+# - jq
 # - xcode and developer tools (i.e. xcode-select --install)
 # - gnu coreutils (brew install coreutils)
 # - macfuse for isntalling avfs and extfuse (brew install macfuse)
@@ -17,9 +18,6 @@
 
 # * Helpers/Setup
 basedir=$(dirname "$(realpath "$0")")
-rdotfiles=https://raw.githubusercontent.com/noctuid/dotfiles/master
-svn_dotfiles=https://github.com/noctuid/dotfiles/trunk
-
 export USE_NIX=${USE_NIX:-false}
 
 # shellcheck disable=SC1090

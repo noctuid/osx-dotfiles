@@ -25,4 +25,4 @@ install_brew() {
 #       /usr/local/share/zsh/site-functions
 
 # macfuse required for various packages (e.g. avfs and extfuse)
-brew install coreutils macfuse svn
+brew install coreutils macfuse jq
