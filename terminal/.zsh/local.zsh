@@ -13,3 +13,7 @@ dots() {
 integresql() {
     PGUSER=postgres PGPASSWORD=postgres $HOME/go/bin/server
 }
+
+# * Mise
+# https://mise.jdx.dev/
+eval "$(mise activate zsh)"

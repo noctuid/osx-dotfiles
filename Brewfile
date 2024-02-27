@@ -174,6 +174,9 @@ brew "editorconfig"
 # cask "basictex"
 
 # * Programming
+# for managing python/npm versions
+brew "mise"
+
 # ** General
 brew "tree-sitter"
 
@@ -211,12 +214,8 @@ brew "shellcheck"
 # ** Javascript/Typescript
 # brew "node"
 brew "yarn"
-# brew "nvm"
-# infinitely faster
-brew "fnm"
 
 # ** Python
-brew "pyenv"
 brew "python"
 # TODO better way to install this?
 brew "poetry"
