@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
-label=$(yabai -m query --spaces --space | jq --raw-output '.label')
+# label=$(yabai -m query --spaces --space | jq --raw-output '.label')
+label=$(aerospace list-workspaces --focused)
 case $label in
 	one) open -a 'Microsoft Outlook';;
 	two) emacsclient -c;;

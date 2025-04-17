@@ -67,7 +67,8 @@ brew "lesspipe"
 # bound to command+. by default
 # cask "hotswitch"
 
-brew "yabai"
+# brew "yabai"
+brew "aerospace"
 brew "sketchybar"
 
 # launcher

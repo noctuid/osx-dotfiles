@@ -1,4 +1,7 @@
 #!/usr/bin/env bash
+
+# ERROR LOG LOCATION: /opt/homebrew/var/log/sketchybar/sketchybar.err.log
+
 # * Other Bars
 # - https://github.com/cmacrae/spacebar
 #   - based on bar yabai used to have (and sketchy in turn started from)
@@ -94,12 +97,13 @@ sketchybar --add item apple.logo left \
 
 source "$itemsdir"/spaces.sh
 
+# TODO fix events for aerospace
 sketchybar -m \
 		   --add item yabai_layout left \
 		   --set yabai_layout \
 		   icon.padding_right="$HALF_PADDING" \
 		   update_freq=3 \
-		   script="$PLUGIN_DIR/yabai_layout.sh" \
+		   script="$PLUGIN_DIR/wm_layout.sh" \
 		   --add event yabai_layout_change \
 		   --subscribe yabai_layout \
 		   space_change \

@@ -105,24 +105,40 @@ cmd + ctrl - l : lockscreen
 # open mpv
 cmd + ctrl - m : open -na /Applications/mpv.app $(pbpaste)
 
-# * Yabai
-ctrl - escape : yabei toggle
+# * Yabai | Aerospace
+# ctrl - escape : yabei toggle
+ctrl - escape : aerospace enable toggle
 # .
-ctrl - 0x2F : yabai --restart-service
+# TODO
+# ctrl - 0x2F : yabai --restart-service
+ctrl - 0x2F : aerospace reload-config
+
 
 # ** Window Keybindings
-ctrl - w : yabai -m window --close
+# ctrl - w : yabai -m window --close
+ctrl - w : aerospace close
 
-ctrl - k : yabei down
-ctrl - u : yabei left
-ctrl - y : yabei right
+# ctrl - k : yabei down
+# ctrl - u : yabei left
+# ctrl - y : yabei right
 # ;
-ctrl - 0x29 : yabei up
+# ctrl - 0x29 : yabei up
+ctrl - k : aerospace focus --boundaries-action wrap-around-the-workspace down
+ctrl - u : aerospace focus --boundaries-action wrap-around-the-workspace left
+ctrl - y : aerospace focus --boundaries-action wrap-around-the-workspace right
+# ;
+ctrl - 0x29 : aerospace focus --boundaries-action wrap-around-the-workspace up
 
-ctrl + shift - k : yabai -m window --swap south
-ctrl + shift - u : yabai -m window --swap west
-ctrl + shift - y : yabai -m window --swap east
-ctrl + shift - 0x29 : yabai -m window --swap north
+# ctrl + shift - k : yabai -m window --swap south
+# ctrl + shift - u : yabai -m window --swap west
+# ctrl + shift - y : yabai -m window --swap east
+# ;
+# ctrl + shift - 0x29 : yabai -m window --swap north
+ctrl + shift - k : aerospace move down
+ctrl + shift - u : aerospace move left
+ctrl + shift - y : aerospace move right
+# ;
+ctrl + shift- 0x29 : aerospace move up
 
 # maintain current size instead of taking other window's size
 # ctrl + shift - l : yabai -m window --warp south
@@ -130,46 +146,80 @@ ctrl + shift - 0x29 : yabai -m window --swap north
 # ctrl + shift - y : yabai -m window --warp east
 # ctrl + shift - 0x29 : yabai -m window --warp north
 
-ctrl + shift - v : yabai -m window --toggle float
-ctrl + shift - c : yabai -m window --toggle sticky
-ctrl - m : yabei toggle_layout
-ctrl - b : yabai -m space --balance
+# ctrl + shift - v : yabai -m window --toggle float
+# no aerospace equivalent for window?
+ctrl + shift - v : aerospace layout floating tiling
+
+# ctrl + shift - c : yabai -m window --toggle sticky
+# aerospace does not currently have sticky
+
+# ctrl - m : yabei toggle_layout
+ctrl - m : aerospace layout tiles accordion
+
+# ctrl - b : yabai -m space --balance
+ctrl - b : aerospace balance-sizes
 
 # not really fullscreen, just toggling padding/gaps/bar
-ctrl - f : yabei toggle_maximize_available_space
-ctrl + shift - f : yabai -m window --toggle native-fullscreen
-ctrl - z : yabai -m window --toggle zoom-parent
+# ctrl - f : yabei toggle_maximize_available_space
+# ctrl + shift - f : yabai -m window --toggle native-fullscreen
+# ctrl - z : yabai -m window --toggle zoom-parent
+
+# basically does nothing other than remove accordion padding
+ctrl - f : aerospace fullscreen
 
 # ** Space Keybindings
 # use labels so don't have to rely on order (which mac can change... fullscreen
 # windows will change, manually created spaces, etc.)
-ctrl - a : yabai -m space --focus one
-ctrl - r : yabai -m space --focus two
-ctrl - s : yabai -m space --focus three
-ctrl - t : yabai -m space --focus four
-ctrl - d : yabai -m space --focus five
-ctrl - h : yabai -m space --focus six
-ctrl - n : yabai -m space --focus seven
-ctrl - e : yabai -m space --focus eight
-ctrl - i : yabai -m space --focus nine
-ctrl - o : yabai -m space --focus ten
+# ctrl - a : yabai -m space --focus one
+# ctrl - r : yabai -m space --focus two
+# ctrl - s : yabai -m space --focus three
+# ctrl - t : yabai -m space --focus four
+# ctrl - d : yabai -m space --focus five
+# ctrl - h : yabai -m space --focus six
+# ctrl - n : yabai -m space --focus seven
+# ctrl - e : yabai -m space --focus eight
+# ctrl - i : yabai -m space --focus nine
+# ctrl - o : yabai -m space --focus ten
+ctrl - a : aerospace workspace one
+ctrl - r : aerospace workspace two
+ctrl - s : aerospace workspace three
+ctrl - t : aerospace workspace four
+ctrl - d : aerospace workspace five
+ctrl - h : aerospace workspace six
+ctrl - n : aerospace workspace seven
+ctrl - e : aerospace workspace eight
+ctrl - i : aerospace workspace nine
+ctrl - o : aerospace workspace ten
 
-ctrl - l : yabai -m space --focus recent
+# ctrl - l : yabai -m space --focus recent
+ctrl - l : aerospace workspace-back-and-forth
 
-ctrl + shift - a : yabei move_to one
-ctrl + shift - r : yabei move_to two
-ctrl + shift - s : yabei move_to three
-ctrl + shift - t : yabei move_to four
-ctrl + shift - d : yabei move_to five
-ctrl + shift - h : yabei move_to six
-ctrl + shift - n : yabei move_to seven
-ctrl + shift - e : yabei move_to eight
-ctrl + shift - i : yabei move_to nine
-ctrl + shift - o : yabei move_to ten
+# ctrl + shift - a : yabei move_to one
+# ctrl + shift - r : yabei move_to two
+# ctrl + shift - s : yabei move_to three
+# ctrl + shift - t : yabei move_to four
+# ctrl + shift - d : yabei move_to five
+# ctrl + shift - h : yabei move_to six
+# ctrl + shift - n : yabei move_to seven
+# ctrl + shift - e : yabei move_to eight
+# ctrl + shift - i : yabei move_to nine
+# ctrl + shift - o : yabei move_to ten
+ctrl + shift - a : aerospace move-node-to-workspace one
+ctrl + shift - r : aerospace move-node-to-workspace two
+ctrl + shift - s : aerospace move-node-to-workspace three
+ctrl + shift - t : aerospace move-node-to-workspace four
+ctrl + shift - d : aerospace move-node-to-workspace five
+ctrl + shift - h : aerospace move-node-to-workspace six
+ctrl + shift - n : aerospace move-node-to-workspace seven
+ctrl + shift - e : aerospace move-node-to-workspace eight
+ctrl + shift - i : aerospace move-node-to-workspace nine
+ctrl + shift - o : aerospace move-node-to-workspace ten
 
 # ** Display Keybindings
 # ,
-ctrl - 0x2B : yabei display_cycle
+# ctrl - 0x2B : yabei display_cycle
+ctrl - 0x2B : aerospace focus-monitor next --wrap-around
+ctrl + shift - 0x2B : aerospace move-node-to-monitor next --wrap-around
 
 # ** TODO Gap Adjustment
 # https://github.com/koekeishiya/yabai/wiki/Commands#modify-padding-and-gaps

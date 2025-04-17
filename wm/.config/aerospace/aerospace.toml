@@ -1,0 +1,21 @@
+start-at-login = true
+
+default-root-container-layout = "accordion"
+accordion-padding = 10
+
+exec-on-workspace-change = [
+    "/bin/bash", "-c", "sketchybar --trigger aerospace_workspace_change FOCUSED_WORKSPACE=$AEROSPACE_FOCUSED_WORKSPACE"
+]
+
+# clear keybindings
+mode.main.binding = {}
+mode.service.binding = {}
+
+[gaps]
+inner.horizontal = 12
+inner.vertical =   12
+outer.left =       12
+outer.bottom =     12
+outer.top =        12
+outer.right =      12
+
