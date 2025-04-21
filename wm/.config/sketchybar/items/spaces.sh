@@ -56,7 +56,8 @@ create_space_settings() {
 	font=$4
 	settings=(
 		--add item space."$name" left
-		--subscribe space."$name" aerospace_workspace_change
+		--subscribe space."$name"
+		wm_focus_change
 		--set space."$name"
 		label.drawing=off
 		icon="$icon"
@@ -82,7 +83,7 @@ create_space_settings() {
 
 # TODO make yabai events these generic
 sketchybar -m \
-		   --add event aerospace_workspace_change \
+		   --add event wm_focus_change \
 		   --add event yabai_window_created \
 		   --add event yabai_window_destroyed \
 		   --add event yabai_window_moved_space

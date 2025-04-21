@@ -3,9 +3,13 @@ start-at-login = true
 default-root-container-layout = "accordion"
 accordion-padding = 10
 
-exec-on-workspace-change = [
-    "/bin/bash", "-c", "sketchybar --trigger aerospace_workspace_change FOCUSED_WORKSPACE=$AEROSPACE_FOCUSED_WORKSPACE"
-]
+# issue #351
+on-focus-changed = "exec-and-forget sketchybar --trigger wm_focus_change"
+# on-focus-changed = "exec-async sketchybar --trigger wm_focus_change FOCUSED_WORKSPACE=$AEROSPACE_FOCUSED_WORKSPACE"
+
+# exec-on-workspace-change = [
+#     "/bin/bash", "-c", "sketchybar --trigger wm_workspace_change FOCUSED_WORKSPACE=$AEROSPACE_FOCUSED_WORKSPACE"
+# ]
 
 # clear keybindings
 mode.main.binding = {}

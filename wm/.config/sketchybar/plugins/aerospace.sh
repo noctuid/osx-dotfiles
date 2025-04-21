@@ -8,7 +8,12 @@ source ~/bin/helpers.sh
 
 args=()
 
-if [[ $1 == "$FOCUSED_WORKSPACE" ]]; then
+current_workspace=$FOCUSED_WORKSPACE
+if [[ -z $current_workspace ]]; then
+	current_workspace=$(aerospace list-workspaces --focused)
+fi
+
+if [[ $1 == "$current_workspace" ]]; then
 	args+=(--set "$NAME" icon.background.y_offset="$UNDERLINE_OFFSET")
 else
 	args+=(--set "$NAME" icon.background.y_offset=-"$BAR_HEIGHT")
